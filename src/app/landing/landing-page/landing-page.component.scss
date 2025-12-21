@@ -1,0 +1,7 @@
+.product-grid {
+  display: flex;       /* Pone los elementos en fila */
+  flex-wrap: wrap;    /* Si no caben en la pantalla, saltan a la siguiente línea */
+  gap: 20px;          /* Espacio entre cada tarjeta */
+  justify-content: center; /* Centra las tarjetas en el medio */
+  padding: 20px;
+}

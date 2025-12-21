@@ -1,0 +1,14 @@
+<mat-toolbar color="primary" class="header">
+  <span routerLink="/home" class="logo">Mi E-Commerce</span>
+
+  <span class="spacer"></span>
+
+  <button mat-button routerLink="/home" routerLinkActive="active">Inicio</button>
+
+  @if (authService.isLoggedIn()) {
+    <button mat-button routerLink="/admin/products" routerLinkActive="active">Administración</button>
+    <button mat-raised-button color="warn" (click)="onLogout()">Cerrar Sesión</button>
+  } @else {
+    <button mat-raised-button (click)="router.navigate(['/login'])">Iniciar Sesión</button>
+  }
+</mat-toolbar>
