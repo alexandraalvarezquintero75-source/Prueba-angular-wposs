@@ -1,15 +1,15 @@
+<!-- Responsabilidad: Mostrar la información de un único producto de forma atractiva. -->
 <mat-card class="product-card">
   <img mat-card-image [src]="product.images[0]" [alt]="product.title" />
 
   <mat-card-content>
-    <h3 class="product-title">{{ product.title }}</h3>
-    <p class="product-price">{{ product.price | currency }}</p>
-    <p class="product-description">
-      {{ product.description | slice : 0 : 60 }}...
-    </p>
+    <h3>{{ product.title }}</h3>
+    <p>{{ product.price | currency }}</p>
+    <p>{{ product.description | slice : 0 : 60 }}...</p>
   </mat-card-content>
+
   <mat-card-actions>
-    <button mat-flat-button color="primary" (click)="addToCart()">
+    <button mat-flat-button color="primary" (click)="onAddToCart()">
       Añadir al carrito
     </button>
   </mat-card-actions>

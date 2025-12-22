@@ -1,7 +1,79 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+  background-color: #f8f9fa;
+
+  @media (max-width: 600px) {
+    padding: 0 10px; 
+  }
+}
+
+.filter-section {
+  display: flex;
+  justify-content: center; 
+  padding: 20px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; 
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  mat-chip-listbox {
+    display: flex;
+    justify-content: center;
+    min-width: max-content; 
+  }
+
+  ::ng-deep .mdc-evolution-chip__cell {
+    --mdc-chip-elevated-container-color: #ffffff;
+    --mdc-chip-selected-elevated-container-color: #00e5ff; 
+    --mdc-chip-label-text-color: #333333;
+    --mdc-chip-selected-label-text-color: #ffffff;
+    border-radius: 25px !important; 
+    font-size: 14px;
+
+    @media (max-width: 600px) {
+      font-size: 12px;
+    }
+  }
+}
+
 .product-grid {
-  display: flex;       /* Pone los elementos en fila */
-  flex-wrap: wrap;    /* Si no caben en la pantalla, saltan a la siguiente línea */
-  gap: 20px;          /* Espacio entre cada tarjeta */
-  justify-content: center; /* Centra las tarjetas en el medio */
-  padding: 20px;
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+  gap: 20px;
+  padding-bottom: 40px;
+
+ 
+  @media (max-width: 650px) {
+
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  @media (min-width: 651px) and (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+.no-products{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 40px;
+  width: 100%;
+  grid-column: 1/-1;
+}
+
+.no-products mat-icon {
+  font-size: 48px;         
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;      
+  color: #757575;          
 }

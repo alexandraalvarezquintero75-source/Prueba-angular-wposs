@@ -6,27 +6,28 @@ import { AdminProductTableComponent } from './products/admin-product-table/admin
 import { AdminCategoryTableComponent } from './categories/admin-category-table/admin-category-table.component';
 import { ProductFormComponent } from './products/product-form/product-form.component';
 import { CategoryFormComponent } from './categories/category-form/category-form.component';
-
+import { ProductDetailComponent } from './products/product-detail/product-detail/product-detail.component';
 // Nota: Según tus comandos 'ng g c landing/landing-page', el componente se llama LandingPageComponent
 import { LandingPageComponent } from './landing/landing-page/landing-page.component';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-  // Redirección inicial
+
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   // Rutas Públicas
-  { path: 'home', component: LandingPageComponent }, //aqui mostrare los productCards
+  { path: 'home', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'product/:id', component: ProductDetailComponent },
 
   // Rutas Administrativas Protegidas
   {
     path: 'admin',
     canActivate: [authGuard],
     children: [
-      { path: 'products', component: AdminProductTableComponent }, // Aquí mostrarás la Tabla
+      { path: 'products', component: AdminProductTableComponent }, 
       { path: 'products/new', component: ProductFormComponent },
       { path: 'products/edit/:id', component: ProductFormComponent },
       { path: 'categories', component: AdminCategoryTableComponent },
@@ -35,6 +36,6 @@ export const routes: Routes = [
     ],
   },
 
-  // Ruta Comodín (404) - Siempre al final
+
   { path: '**', redirectTo: 'home' },
 ];

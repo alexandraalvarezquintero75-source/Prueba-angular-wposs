@@ -1,9 +1,27 @@
 <div class="container">
-  <h1>Bienvenido a nuestra tienda</h1>
+  <div class="filter-section">
+    <mat-chip-listbox aria-label="Selección de categorías">
+      <mat-chip-option selected (click)="loadProducts()">Todos</mat-chip-option>
+
+      @for (cat of categories; track cat.id) {
+      <mat-chip-option (click)="filterByCategory(cat.id)">
+        {{ cat.name }}
+      </mat-chip-option>
+      }
+    </mat-chip-listbox>
+  </div>
 
   <div class="product-grid">
     @for (product of products; track product.id) {
-    <app-product-card [product]="product"></app-product-card>
+    <app-product-card
+      [product]="product"
+      (addToCard)="onAddToCart($event)"
+    ></app-product-card>
+    } @empty {
+    <div class="no-products">
+      <mat-icon> sentiment-dissatisfied</mat-icon>
+      <p>No se encontraron productos en esta categoria</p>
+    </div>
     }
   </div>
 </div>

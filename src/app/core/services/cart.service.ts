@@ -1,17 +1,30 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Product } from '../../shared/components/models/product.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-  private cartItems: any[] = JSON.parse(localStorage.getItem('cart') || '[]');
-  private _cart = new BehaviorSubject<any[]>(this.cartItems);
+  private cartItems: Product[] = JSON.parse(
+    localStorage.getItem('cart') || '[]'
+  );
 
+  private _cart = new BehaviorSubject<Product[]>(this.cartItems);
   cart$ = this._cart.asObservable();
 
-  addToCart(product: any) {
+  addToCart(product: Product) {
     this.cartItems.push(product);
+    this.saveCart();
+  }
+
+  removeFromCart(productId: number) {
+    this.cartItems = this.cartItems.filter((p) => p.id !== productId);
+    this.saveCart();
+  }
+
+  clearCart() {
+    this.cartItems = [];
     this.saveCart();
   }
 

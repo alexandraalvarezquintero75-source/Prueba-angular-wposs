@@ -1,14 +1,29 @@
-<mat-toolbar color="primary" class="header">
-  <span routerLink="/home" class="logo">Mi E-Commerce</span>
+<mat-toolbar color="primary" class="header-container">
+  <span
+    routerLink="/home"
+    class="logo-container"
+    style="cursor: pointer; display: flex; align-items: center"
+  >
+    <img src="/image/logo.webp" style="height: 40px; margin-right: 10px" />
+    <span style="font-weight: bold">Mi E-Commerce</span>
+  </span>
 
   <span class="spacer"></span>
 
-  <button mat-button routerLink="/home" routerLinkActive="active">Inicio</button>
+  <button mat-button routerLink="/home" routerLinkActive="active">
+    Inicio
+  </button>
+
+  <button mat-button routerLink="/cart">🛒 Carrito ({{ cartCount }})</button>
 
   @if (authService.isLoggedIn()) {
-    <button mat-button routerLink="/admin/products" routerLinkActive="active">Administración</button>
-    <button mat-raised-button color="warn" (click)="onLogout()">Cerrar Sesión</button>
+  <button mat-button routerLink="/admin/products" routerLinkActive="active">
+    Administración
+  </button>
+  <button mat-raised-button color="warn" (click)="onLogout()">
+    Cerrar Sesión
+  </button>
   } @else {
-    <button mat-raised-button (click)="router.navigate(['/login'])">Iniciar Sesión</button>
+  <button mat-raised-button routerLink="/login">Iniciar Sesión</button>
   }
 </mat-toolbar>

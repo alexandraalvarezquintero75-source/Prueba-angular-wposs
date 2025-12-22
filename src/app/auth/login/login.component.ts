@@ -54,7 +54,7 @@ export class LoginComponent {
         localStorage.setItem('token', res.token);
         this.loading = false;
         this.snackBar.open('¡Login exitoso!', 'Cerrar', { duration: 2000 });
-        this.router.navigate(['/home']); // redirige a landing o dashboard
+        this.router.navigate(['/home']); 
       },
       error: (err) => {
         this.loading = false;
