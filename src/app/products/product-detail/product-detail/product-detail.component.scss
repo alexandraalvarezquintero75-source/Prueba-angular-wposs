@@ -1,0 +1,53 @@
+.detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; // Dos columnas en PC
+  gap: 40px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; // Una sola columna en móvil
+    margin: 20px auto;
+  }
+}
+
+.main-img {
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.3s;
+
+    &.active { border-color: #00e5ff; } // Tu color Cyan
+    &:hover { opacity: 0.8; }
+  }
+}
+
+.add-to-cart-btn {
+  background: #00e5ff;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  transition: 0.3s;
+
+  &:hover { transform: scale(1.02); background: #00c8e0; }
+}

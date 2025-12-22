@@ -4,76 +4,70 @@
   padding: 0 16px;
   background-color: #f8f9fa;
 
+  /* 📱 Mobile */
   @media (max-width: 600px) {
-    padding: 0 10px; 
+    padding: 0 10px;
   }
 }
 
 .filter-section {
+  margin-bottom: 16px;
+}
+
+.category-chips {
   display: flex;
-  justify-content: center; 
-  padding: 20px 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch; 
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  mat-chip-listbox {
-    display: flex;
-    justify-content: center;
-    min-width: max-content; 
-  }
-
-  ::ng-deep .mdc-evolution-chip__cell {
-    --mdc-chip-elevated-container-color: #ffffff;
-    --mdc-chip-selected-elevated-container-color: #00e5ff; 
-    --mdc-chip-label-text-color: #333333;
-    --mdc-chip-selected-label-text-color: #ffffff;
-    border-radius: 25px !important; 
-    font-size: 14px;
-
-    @media (max-width: 600px) {
-      font-size: 12px;
-    }
-  }
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 100%;
 }
 
 .product-grid {
   display: grid;
-
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-  gap: 20px;
   padding-bottom: 40px;
 
- 
-  @media (max-width: 650px) {
+  /* 📱 Mobile (default) */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px;
+  /* 📱 Mobile pequeño */
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
   }
 
-  @media (min-width: 651px) and (max-width: 1024px) {
+  /* 📲 Tablet */
+  @media (min-width: 601px) and (max-width: 1024px) {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  /* 💻 Desktop */
+  @media (min-width: 1025px) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
   }
 }
-.no-products{
+
+
+.no-products {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   justify-content: center;
-  padding: 40px;
+  text-align: center;
   width: 100%;
-  grid-column: 1/-1;
+  grid-column: 1 / -1;
+  padding: 40px;
+
+  /* 📱 Mobile */
+  @media (max-width: 600px) {
+    padding: 16px;
+  }
 }
 
 .no-products mat-icon {
-  font-size: 48px;         
+  font-size: 48px;
   width: 48px;
   height: 48px;
-  margin-bottom: 10px;      
-  color: #757575;          
+  margin-bottom: 10px;
+  color: #757575;
 }

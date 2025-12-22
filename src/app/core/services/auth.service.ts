@@ -1,60 +1,7 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable, tap } from 'rxjs';
-
-// // La API de Platzi devuelve access_token y refresh_token
-// interface LoginResponse {
-//   access_token: string;
-//   refresh_token: string;
-// }
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class AuthService {
-//   // Definimos la URL base limpia para poder usar diferentes endpoints
-//   private API_URL = 'https://api.escuelajs.co/api/v1';
-
-//   constructor(private http: HttpClient) {}
-
-//   // Login
-//   login(credentials: { email: string; password: string }): Observable<LoginResponse> {
-//     return this.http.post<LoginResponse>(`${this.API_URL}/auth/login`, credentials).pipe(
-//       // Usamos tap para guardar el token automáticamente al loguear
-//       tap(res => {
-//         if (res.access_token) {
-//           localStorage.setItem('token', res.access_token);
-//         }
-//       })
-//     );
-//   }
-
-//   // Registro: En la Fake Store API de Platzi, el registro es en /users
-//   // Nota: Requiere name, email, password y un avatar (puedes poner uno por defecto)
-//   register(data: { name: string; email: string; password: string }): Observable<any> {
-//     const newUser = {
-//       ...data,
-//       avatar: 'https://picsum.photos/800' // La API exige un avatar para crear el usuario
-//     };
-//     return this.http.post(`${this.API_URL}/users`, newUser);
-//   }
-
-//   logout(): void {
-//     localStorage.removeItem('token');
-//   }
-
-//   isLoggedIn(): boolean {
-//     return !!localStorage.getItem('token');
-//   }
-
-//   getToken(): string | null {
-//     return localStorage.getItem('token');
-//   }
-// }
-
-import { Injectable, signal } from '@angular/core'; // Importamos signal
+import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, switchMap, of } from 'rxjs';
+import { User } from '../../shared/components/models/user.model';
 
 interface LoginResponse {
   access_token: string;
@@ -66,43 +13,57 @@ interface LoginResponse {
 })
 export class AuthService {
   private API_URL = 'https://api.escuelajs.co/api/v1';
+  private http = inject(HttpClient);
 
-  // 1. Creamos un Signal que guarda el estado de la sesión
-  // Se inicializa comprobando si ya existe un token
+  // Signals para manejar el estado global de la sesión
+  private userProfile = signal<User | null>(null);
+  public currentUser = this.userProfile.asReadonly();
+
   private _isLoggedIn = signal<boolean>(!!localStorage.getItem('token'));
-
-  // 2. Exponemos el signal como solo lectura para los componentes
   public isLoggedIn = this._isLoggedIn.asReadonly();
 
-  constructor(private http: HttpClient) {}
-
-  login(credentials: { email: string; password: string }): Observable<LoginResponse> {
+  // 1. Login optimizado: Obtiene token y perfil en un solo flujo
+  login(credentials: { email: string; password: string }): Observable<User> {
     return this.http.post<LoginResponse>(`${this.API_URL}/auth/login`, credentials).pipe(
-      tap(res => {
+      tap((res) => {
         if (res.access_token) {
-          localStorage.setItem('token', res.access_token);
-          // 3. ¡IMPORTANTE! Notificamos al signal que el usuario entró
+          localStorage.setItem('token', res.access_token); // Guardar JWT
           this._isLoggedIn.set(true);
         }
+      }),
+      // Una vez logueado, usamos switchMap para pedir el perfil inmediatamente
+      switchMap(() => this.getProfile())
+    );
+  }
+
+  // 2. Obtener el perfil del usuario (necesario para saber el rol)
+  getProfile(): Observable<User> {
+    return this.http.get<User>(`${this.API_URL}/auth/profile`).pipe(
+      tap((user) => {
+        this.userProfile.set(user);
+        console.log('Perfil cargado:', user.role); // Para debuggear el rol
       })
     );
   }
 
-  register(data: { name: string; email: string; password: string }): Observable<any> {
-    const newUser = {
-      ...data,
-      avatar: 'https://picsum.photos/800'
-    };
-    return this.http.post(`${this.API_URL}/users`, newUser);
-  }
-
-  logout(): void {
-    localStorage.removeItem('token');
-    // 4. Notificamos al signal que el usuario salió
-    this._isLoggedIn.set(false);
+  // 3. Método auxiliar para el AuthGuard
+  isAdmin(): boolean {
+    const user = this.userProfile();
+    return user?.role === 'admin'; // El requerimiento pide validar admin/customer
   }
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.userProfile.set(null);
+    this._isLoggedIn.set(false);
+  }
+
+  register(data: { name: string; email: string; password: string }): Observable<any> {
+    const newUser = { ...data, avatar: 'https://picsum.photos/800' };
+    return this.http.post(`${this.API_URL}/users`, newUser);
   }
 }

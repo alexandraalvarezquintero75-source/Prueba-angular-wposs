@@ -1,4 +1,4 @@
-export interface Catergory {
+export interface Category {
   id: number;
   name: string;
   image: string;

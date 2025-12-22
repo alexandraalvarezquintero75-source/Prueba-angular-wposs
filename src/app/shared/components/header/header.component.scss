@@ -1,6 +1,25 @@
-// .header-container{
-//   background-color: aqua;
-// }
-// .logo{
-//   background-color: brown;
-// }
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.left-section,
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+@media (max-width: 768px) {
+  .left-section,
+  .right-section {
+    gap: 6px;
+  }
+}
+button {
+    padding: 0 8px;
+  }
+

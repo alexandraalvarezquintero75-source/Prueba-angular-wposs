@@ -1,5 +1,3 @@
-
-
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
@@ -48,17 +46,33 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.invalid) return;
     this.loading = true;
-    const { email, password } = this.loginForm.value;
-    this.authService.login({ email, password }).subscribe({
-      next: (res: any) => {
-        localStorage.setItem('token', res.token);
+
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (user) => {
         this.loading = false;
-        this.snackBar.open('¡Login exitoso!', 'Cerrar', { duration: 2000 });
-        this.router.navigate(['/home']); 
+        this.snackBar.open(`¡Bienvenido ${user.name}!`, 'Cerrar', {
+          duration: 2000,
+        });
+
+        // Lógica de redirección por Rol
+        //   if (this.authService.isAdmin()) {
+        //     this.router.navigate(['/admin/products']); // Directo a la gestión
+        //   } else {
+        //     this.router.navigate(['/home']);
+        //   }
+        // },
+        if (user.role === 'admin') {
+          // Si es admin, lo mandamos directo al panel de control
+          this.router.navigate(['/admin/products']);
+        } else {
+          // Si es cliente, se queda en la tienda
+          this.router.navigate(['/home']);
+        }
       },
+
       error: (err) => {
         this.loading = false;
-        this.snackBar.open('Credenciales inválidas', 'Cerrar', {
+        this.snackBar.open('Error: Verifica tus credenciales', 'Cerrar', {
           duration: 3000,
         });
       },

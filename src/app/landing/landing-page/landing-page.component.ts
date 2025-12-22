@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
 import { ProductCardComponent } from '../../products/product-card/product-card.component';
 import { Product } from '../../shared/components/models/product.model';
-import { Catergory } from '../../shared/components/models/category.model';
+import { Category } from '../../shared/components/models/category.model';
 import { CartService } from '../../core/services/cart.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-landing-page',
@@ -20,7 +21,9 @@ export class LandingPageComponent implements OnInit {
   private cartService = inject(CartService);
 
   products: Product[] = [];
-  categories: Catergory[] = [];
+  categories: Category[] = [];
+
+  constructor(private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -29,7 +32,7 @@ export class LandingPageComponent implements OnInit {
 
   loadCategories(): void {
     this.productService.getCategories().subscribe({
-      next: (data: Catergory[]) => (this.categories = data),
+      next: (data: Category[]) => (this.categories = data),
       error: (err) => console.error('Error al cargar categorías', err),
     });
   }
@@ -49,6 +52,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   onAddToCart(product: Product) {
+    this.toastr.success(`${product.title} se añadió al carrito`, '¡Éxito!');
     this.cartService.addToCart(product);
   }
 }
