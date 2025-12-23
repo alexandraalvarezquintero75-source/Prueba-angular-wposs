@@ -22,34 +22,33 @@ export class AuthService {
   private _isLoggedIn = signal<boolean>(!!localStorage.getItem('token'));
   public isLoggedIn = this._isLoggedIn.asReadonly();
 
-  // 1. Login optimizado: Obtiene token y perfil en un solo flujo
   login(credentials: { email: string; password: string }): Observable<User> {
-    return this.http.post<LoginResponse>(`${this.API_URL}/auth/login`, credentials).pipe(
-      tap((res) => {
-        if (res.access_token) {
-          localStorage.setItem('token', res.access_token); // Guardar JWT
-          this._isLoggedIn.set(true);
-        }
-      }),
-      // Una vez logueado, usamos switchMap para pedir el perfil inmediatamente
-      switchMap(() => this.getProfile())
-    );
+    return this.http
+      .post<LoginResponse>(`${this.API_URL}/auth/login`, credentials)
+      .pipe(
+        tap((res) => {
+          if (res.access_token) {
+            localStorage.setItem('token', res.access_token);
+            this._isLoggedIn.set(true);
+          }
+        }),
+
+        switchMap(() => this.getProfile())
+      );
   }
 
-  // 2. Obtener el perfil del usuario (necesario para saber el rol)
   getProfile(): Observable<User> {
     return this.http.get<User>(`${this.API_URL}/auth/profile`).pipe(
       tap((user) => {
         this.userProfile.set(user);
-        console.log('Perfil cargado:', user.role); // Para debuggear el rol
+        console.log('Perfil cargado:', user.role);
       })
     );
   }
 
-  // 3. Método auxiliar para el AuthGuard
   isAdmin(): boolean {
     const user = this.userProfile();
-    return user?.role === 'admin'; // El requerimiento pide validar admin/customer
+    return user?.role === 'admin';
   }
 
   getToken(): string | null {
@@ -62,8 +61,13 @@ export class AuthService {
     this._isLoggedIn.set(false);
   }
 
-  register(data: { name: string; email: string; password: string }): Observable<any> {
-    const newUser = { ...data, avatar: 'https://picsum.photos/800' };
+  register(data: {
+    name: string;
+    email: string;
+    password: string;
+  }): Observable<any> {
+    // const newUser = { ...data, avatar: 'https://picsum.photos/800' };
+    const newUser = { ...data, avatar: 'https://placebear.com/640/480' };
     return this.http.post(`${this.API_URL}/users`, newUser);
   }
 }

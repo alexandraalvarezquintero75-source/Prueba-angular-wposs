@@ -13,7 +13,7 @@ import { CartService } from '../../../core/services/cart.service';
   styleUrls: ['./product-detail.component.scss'],
 })
 export class ProductDetailComponent implements OnInit {
-  private route = inject(ActivatedRoute); // Para leer el :id de la URL
+  private route = inject(ActivatedRoute); 
   private productService = inject(ProductService);
   private cartService = inject(CartService);
 

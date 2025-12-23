@@ -1,0 +1,39 @@
+@use "ngx-toastr/toastr";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+#toast-container .toast-success {
+  border-radius: 12px !important;
+  background-color: #28a745 !important;
+  color: white !important;
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+:root {
+  --primary-green: #4CAF50;
+  --hover-green: #43A047;
+  --dark-green: #2E7D32;
+  --light-green: #E8F5E9;
+  --white: #ffffff;
+}
+
+.btn-primary-custom {
+  background-color: var(--primary-green  #e53935);
+  color: var(--white);
+  transition: all 0.3s ease;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: var(--hover-green);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}

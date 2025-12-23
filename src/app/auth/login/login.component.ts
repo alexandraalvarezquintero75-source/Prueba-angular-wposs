@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    RouterLink,
   ],
 })
 export class LoginComponent {
@@ -54,7 +56,6 @@ export class LoginComponent {
           duration: 2000,
         });
 
-        // Lógica de redirección por Rol
         //   if (this.authService.isAdmin()) {
         //     this.router.navigate(['/admin/products']); // Directo a la gestión
         //   } else {
@@ -62,10 +63,8 @@ export class LoginComponent {
         //   }
         // },
         if (user.role === 'admin') {
-          // Si es admin, lo mandamos directo al panel de control
           this.router.navigate(['/admin/products']);
         } else {
-          // Si es cliente, se queda en la tienda
           this.router.navigate(['/home']);
         }
       },

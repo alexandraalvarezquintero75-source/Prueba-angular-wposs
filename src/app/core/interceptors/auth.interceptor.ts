@@ -1,18 +1,19 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = localStorage.getItem('token'); // Recuperamos el JWT
+  const token = localStorage.getItem('token');
 
-  // Si el token existe, clonamos la petición y le añadimos el Header
-  if (token) {
+  // const isAuthRequest = req.url.includes('/auth/login') || req.url.includes('/users');
+  const isAuthRequest =
+    req.url.includes('/auth/login') ||
+    (req.url.includes('/users') && req.method === 'POST');
+  if (token && !isAuthRequest) {
     const cloned = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${token}` // Formato estándar JWT
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     return next(cloned);
   }
-
-  // Si no hay token (ej. en el login), la petición sigue su curso normal
   return next(req);
 };

@@ -6,18 +6,16 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // 1. Verificar si hay token
+  // Verificación básica de login
   if (!authService.isLoggedIn()) {
     router.navigate(['/login']);
     return false;
   }
 
-  // 2. Lógica de Roles (Opcional pero recomendada para el proyecto)
-  // Si la ruta empieza por 'admin', verificar que el usuario sea admin
-  const userRole = localStorage.getItem('role'); // O una función en tu service que obtenga el rol
-
-  if (state.url.startsWith('/admin') && userRole !== 'admin') {
-    router.navigate(['/home']); // Redirigir al cliente a la tienda si no es admin
+  // Verificación de Rol para rutas de administración
+  if (state.url.startsWith('/admin') && !authService.isAdmin()) {
+    console.warn('Acceso denegado: Se requiere rol de administrador');
+    router.navigate(['/home']);
     return false;
   }
 

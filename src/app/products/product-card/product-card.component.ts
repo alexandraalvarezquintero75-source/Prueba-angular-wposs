@@ -12,9 +12,6 @@ import { RouterModule } from '@angular/router';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss'],
 })
-// responsabilidad
-// Mostrar el producto
-// Avisar al padre cuando se quiere agregar al carrito
 export class ProductCardComponent {
   @Input() product!: Product;
   @Output() addToCard = new EventEmitter<Product>();

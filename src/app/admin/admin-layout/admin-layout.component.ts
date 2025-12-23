@@ -31,7 +31,6 @@ export class AdminLayoutComponent {
   }
 
   get currentRouteTitle(): string {
-    // Lógica opcional para cambiar el título según la ruta
     return this.router.url.includes('products') ? 'Productos' : 'Categorías';
   }
 }

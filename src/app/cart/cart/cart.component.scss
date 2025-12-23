@@ -1,6 +1,7 @@
 .cart-container{
   max-width: 800px;
   margin: 2rem auto;
+
 }
 
 .cart-summary{
@@ -8,4 +9,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
+}
+.price{
+  color: rgb(125, 211, 39);
 }

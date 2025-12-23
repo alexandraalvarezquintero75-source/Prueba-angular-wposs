@@ -1,13 +1,13 @@
 .detail-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; // Dos columnas en PC
+  grid-template-columns: 1fr 1fr;
   gap: 40px;
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr; // Una sola columna en móvil
+    grid-template-columns: 1fr;
     margin: 20px auto;
   }
 }
@@ -32,13 +32,13 @@
     border: 2px solid transparent;
     transition: 0.3s;
 
-    &.active { border-color: #00e5ff; } // Tu color Cyan
+    &.active { border-color:rgb(66, 208, 61) } 
     &:hover { opacity: 0.8; }
   }
 }
 
 .add-to-cart-btn {
-  background: #00e5ff;
+  background: rgb(66, 208, 61);
   color: white;
   border: none;
   padding: 15px 30px;
@@ -49,5 +49,5 @@
   margin-top: 20px;
   transition: 0.3s;
 
-  &:hover { transform: scale(1.02); background: #00c8e0; }
+  &:hover { transform: scale(1.02); background: rgb(66, 208, 61) }
 }

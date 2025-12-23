@@ -10,9 +10,9 @@
       </mat-chip-option>
 
       @for (cat of categories; track cat.id) {
-        <mat-chip-option (click)="filterByCategory(cat.id)">
-          {{ cat.name }}
-        </mat-chip-option>
+      <mat-chip-option (click)="filterByCategory(cat.id)">
+        {{ cat.name }}
+      </mat-chip-option>
       }
     </mat-chip-listbox>
   </div>
@@ -20,15 +20,25 @@
   <!-- PRODUCTOS -->
   <div class="product-grid">
     @for (product of products; track product.id) {
-      <app-product-card
-        [product]="product"
-        (addToCard)="onAddToCart($event)"
-      ></app-product-card>
+    <app-product-card
+      [product]="product"
+      (addToCard)="onAddToCart($event)"
+    ></app-product-card>
     } @empty {
-      <div class="no-products">
-        <mat-icon>sentiment-dissatisfied</mat-icon>
-        <p>No se encontraron productos de esta categoría</p>
-      </div>
+    <div class="no-products">
+      <mat-icon>sentiment-dissatisfied</mat-icon>
+      <span
+        class="logo-cartOff"
+        style="cursor: pointer; display: flex; align-items: center"
+      >
+        <img
+          src="/images/noProduct.jpg"
+          style="height: 40px; margin-right: 10px"
+        />
+        <!-- <span style="font-weight: bold">Mi E-Commerce</span> -->
+      </span>
+      <p>No se encontraron productos de esta categoría</p>
+    </div>
     }
   </div>
 </div>

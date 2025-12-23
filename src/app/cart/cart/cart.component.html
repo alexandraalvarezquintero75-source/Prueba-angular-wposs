@@ -12,9 +12,9 @@
       <img matListItemAvatar [src]="item.images[0]" [alt]="item.title" />
 
       <div matListItemTitle>{{ item.title }}</div>
-      <div matListItemLine>{{ item.price | currency }}</div>
+      <div matListItemLine class="price">{{ item.price | currency }}</div>
 
-      <button mat-button color="warn" (click)="removeItem(item.id)">
+      <button mat-button   color="warn" (click)="removeItem(item.id)">
         Eliminar
       </button>
     </mat-list-item>

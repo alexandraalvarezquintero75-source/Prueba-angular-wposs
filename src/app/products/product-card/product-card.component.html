@@ -1,4 +1,3 @@
-<!-- Responsabilidad: Mostrar la información de un único producto de forma atractiva. -->
 <mat-card class="product-card">
   <div class="card-clickable-area" [routerLink]="['/product', product.id]">
     <img mat-card-image [src]="product.images[0]" [alt]="product.title" />
@@ -11,7 +10,11 @@
   </div>
 
   <mat-card-actions>
-    <button mat-flat-button color="primary" (click)="onAddToCart($event)">
+    <button
+      mat-flat-button
+      class="add-to-cart-btn"
+      (click)="onAddToCart($event)"
+    >
       Añadir al carrito
     </button>
   </mat-card-actions>

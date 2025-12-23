@@ -39,6 +39,7 @@ export class LandingPageComponent implements OnInit {
 
   loadProducts(): void {
     this.productService.getProducts().subscribe({
+      
       next: (data: Product[]) => (this.products = data),
       error: (err) => console.error('Error al cargar productos', err),
     });
