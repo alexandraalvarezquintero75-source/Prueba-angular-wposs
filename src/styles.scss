@@ -37,3 +37,31 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 }
+
+
+/* Asegura que el body use todo el alto de la pantalla */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* El contenedor principal debe ser un flexbox vertical */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
+}
+
+/* El contenido central crecerá para empujar el footer al fondo */
+.main-content {
+  flex: 1;
+}
+
+/* Estilo para tu footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}

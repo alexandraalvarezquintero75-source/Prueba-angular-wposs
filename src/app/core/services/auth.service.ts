@@ -22,6 +22,15 @@ export class AuthService {
   private _isLoggedIn = signal<boolean>(!!localStorage.getItem('token'));
   public isLoggedIn = this._isLoggedIn.asReadonly();
 
+  constructor() {
+    const token = this.getToken();
+    if (token) {
+      this.getProfile().subscribe({
+        error: () => this.logout(), // Si el token expiró, limpiamos
+      });
+    }
+  }
+
   login(credentials: { email: string; password: string }): Observable<User> {
     return this.http
       .post<LoginResponse>(`${this.API_URL}/auth/login`, credentials)
@@ -37,13 +46,29 @@ export class AuthService {
       );
   }
 
+  // getProfile(): Observable<User> {
+  //   return this.http.get<User>(`${this.API_URL}/auth/profile`).pipe(
+  //     tap((user) => {
+  //       this.userProfile.set(user);
+  //       console.log('Perfil cargado:', user.role);
+  //     })
+  //   );
+  // }
   getProfile(): Observable<User> {
-    return this.http.get<User>(`${this.API_URL}/auth/profile`).pipe(
-      tap((user) => {
-        this.userProfile.set(user);
-        console.log('Perfil cargado:', user.role);
+    const token = this.getToken();
+
+    return this.http
+      .get<User>(`${this.API_URL}/auth/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-    );
+      .pipe(
+        tap((user) => {
+          this.userProfile.set(user);
+          console.log('Perfil cargado:', user.role);
+        })
+      );
   }
 
   isAdmin(): boolean {

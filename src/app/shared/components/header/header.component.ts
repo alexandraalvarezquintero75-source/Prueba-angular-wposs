@@ -55,10 +55,11 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.authService.logout();
+        this.router.navigate(['/login']);
         this.toastr.info('Sesion cerrada con exito', 'Sistema');
       }
     });
     // this.authService.logout();
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
   }
 }

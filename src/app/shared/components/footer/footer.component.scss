@@ -1,0 +1,15 @@
+.footer-bottom {
+  background-color: #1a1d20;
+  color: #6c757d;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.8rem;
+  border-top: 1px solid #343a40;
+}
+
+/* Para alinear iconos con texto */
+.contact p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
