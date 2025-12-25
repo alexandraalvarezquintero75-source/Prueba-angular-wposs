@@ -2,10 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  min-height: 100vh;
+  padding: 16px;
+  background: #f4f6f8;
 
   .login-card {
-    width: 400px;
+    width: 100%;
+    max-width: 400px; 
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -16,9 +19,8 @@
     width: 100%;
   }
 
-
-  .register-link, h2 {
-    cursor: pointer;
+  .register-link,
+  h2 {
     text-align: center;
     margin-top: 1rem;
 
@@ -26,6 +28,28 @@
       text-decoration: none;
       color: #1976d2;
       font-weight: 500;
+    }
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .login-container {
+    .login-card {
+      padding: 1.5rem;
+    }
+  }
+}
+
+/* Móvil */
+@media (max-width: 480px) {
+  .login-container {
+    .login-card {
+      padding: 1.25rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
     }
   }
 }
