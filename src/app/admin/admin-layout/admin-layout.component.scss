@@ -34,3 +34,34 @@
 .page-container {
   padding: 25px;
 }
+mat-nav-list {
+    a[mat-list-item] {
+      // Forzamos el color blanco en el texto y el icono
+      --mdc-list-list-item-label-text-color: #ffffff;
+      --mdc-list-list-item-supporting-text-color: #ffffff;
+
+      .mat-icon {
+        color: white !important;
+      }
+
+      // Estilo para el texto específico de Material 15+
+      span[matListItemTitle] {
+        color: white !important;
+        font-weight: 400;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      // Estilo para cuando el link está activo (clase que tienes en el HTML)
+      &.active-link {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-left: 4px solid #3f51b5; // Una línea de color para resaltar
+
+        span[matListItemTitle] {
+          font-weight: bold;
+        }
+      }
+    }
+  }

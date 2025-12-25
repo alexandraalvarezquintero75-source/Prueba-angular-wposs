@@ -6,15 +6,22 @@ import { Product } from '../../shared/components/models/product.model';
   providedIn: 'root',
 })
 export class CartService {
-  private cartItems: Product[] = JSON.parse(
-    localStorage.getItem('cart') || '[]'
-  );
-
-  private _cart = new BehaviorSubject<Product[]>(this.cartItems);
+  private cartItems: Product[] = [];
+  private _cart = new BehaviorSubject<Product[]>([]);
   cart$ = this._cart.asObservable();
 
+  constructor() {
+    // Inicializar desde localStorage al cargar el servicio
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      this.cartItems = JSON.parse(savedCart);
+      this._cart.next([...this.cartItems]); // Enviamos copia inicial
+    }
+  }
+
   addToCart(product: Product) {
-    this.cartItems.push(product);
+    // Usamos el operador spread [...] para crear una nueva referencia
+    this.cartItems = [...this.cartItems, product];
     this.saveCart();
   }
 
@@ -30,6 +37,7 @@ export class CartService {
 
   private saveCart() {
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
-    this._cart.next(this.cartItems);
+    // IMPORTANTE: Enviamos una copia nueva del arreglo
+    this._cart.next([...this.cartItems]);
   }
 }

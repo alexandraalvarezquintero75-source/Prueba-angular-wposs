@@ -17,13 +17,17 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  private productService = inject(ProductService);
-  private cartService = inject(CartService);
+  // private productService = inject(ProductService);
+  // private cartService = inject(CartService);
 
   products: Product[] = [];
   categories: Category[] = [];
 
-  constructor(private toastr: ToastrService) {}
+  constructor(
+    private toastr: ToastrService,
+    private productService: ProductService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -39,7 +43,6 @@ export class LandingPageComponent implements OnInit {
 
   loadProducts(): void {
     this.productService.getProducts().subscribe({
-      
       next: (data: Product[]) => (this.products = data),
       error: (err) => console.error('Error al cargar productos', err),
     });

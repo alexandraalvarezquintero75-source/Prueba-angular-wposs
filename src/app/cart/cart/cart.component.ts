@@ -18,19 +18,24 @@ import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/c
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  private dialog = inject(MatDialog);
-  private cartService = inject(CartService);
-  private toastr = inject(ToastrService);
+  // private dialog = inject(MatDialog);
+  // private cartService = inject(CartService);
+  // private toastr = inject(ToastrService);
 
   cartItems: Product[] = [];
 
-  constructor() {
+  constructor(
+    private dialog: MatDialog,
+    private cartService: CartService,
+    private toastr: ToastrService
+  ) {
     this.cartService.cart$
       .pipe(takeUntilDestroyed())
       .subscribe((items) => (this.cartItems = items));
   }
 
   ngOnInit(): void {}
+
   removeItem(productId: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',

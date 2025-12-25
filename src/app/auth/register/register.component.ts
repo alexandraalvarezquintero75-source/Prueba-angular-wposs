@@ -1,5 +1,10 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  FormGroup,
+} from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,16 +34,30 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
-  private router = inject(Router);
-  private toastr = inject(ToastrService);
+  // private fb = inject(FormBuilder);
+  // private authService = inject(AuthService);
+  // private router = inject(Router);
+  // private toastr = inject(ToastrService);
+  form!: FormGroup;
 
-  form = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(4)]],
-  });
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
+    this.form = this.fb.nonNullable.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+    });
+  }
+
+  // form = this.fb.nonNullable.group({
+  //   name: ['', [Validators.required, Validators.minLength(3)]],
+  //   email: ['', [Validators.required, Validators.email]],
+  //   password: ['', [Validators.required, Validators.minLength(4)]],
+  // });
 
   register() {
     if (this.form.valid) {
@@ -50,7 +69,6 @@ export class RegisterComponent {
             '¡Bienvenido!'
           );
           console.log('Usuario creado:', user);
-          // Opcional: Redirigir al login o loguear automáticamente
           this.router.navigate(['/login']);
         },
         error: (err) => {

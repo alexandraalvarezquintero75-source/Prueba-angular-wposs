@@ -1,28 +1,32 @@
 @if (product) {
-  <div class="detail-container">
-    <div class="product-images">
-      <div class="main-img-container">
-        <img [src]="mainImage" [alt]="product.title" class="main-img">
-      </div>
-      <div class="thumbnails">
-        @for (img of product.images; track img) {
-          <img [src]="img" (click)="changeImage(img)" [class.active]="img === mainImage">
-        }
-      </div>
+<div class="detail-container">
+  <div class="product-images">
+    <div class="main-img-container">
+      <img [src]="mainImage" [alt]="product.title" class="main-img" />
     </div>
-
-    <div class="product-info">
-      <span class="category-tag">{{ product.category.name }}</span>
-      <h1>{{ product.title }}</h1>
-      <p class="price">{{ product.price | currency }}</p>
-      <hr>
-      <p class="description">{{ product.description }}</p>
-
-      <button class="add-to-cart-btn" (click)="addToCart()">
-        Añadir al carrito
-      </button>
+    <div class="thumbnails">
+      @for (img of product.images; track img) {
+      <img
+        [src]="img"
+        (click)="changeImage(img)"
+        [class.active]="img === mainImage"
+      />
+      }
     </div>
   </div>
+
+  <div class="product-info">
+    <span class="category-tag">{{ product.category.name }}</span>
+    <h1>{{ product.title }}</h1>
+    <p class="price">{{ product.price | currency }}</p>
+    <hr />
+    <p class="description">{{ product.description }}</p>
+
+    <button class="add-to-cart-btn" (click)="addToCart()">
+      Añadir al carrito
+    </button>
+  </div>
+</div>
 } @else {
-  <div class="loading">Cargando producto...</div>
+<div class="loading">Cargando producto...</div>
 }

@@ -13,7 +13,7 @@ interface LoginResponse {
 })
 export class AuthService {
   private API_URL = 'https://api.escuelajs.co/api/v1';
-  private http = inject(HttpClient);
+  // private http = inject(HttpClient);
 
   // Signals para manejar el estado global de la sesión
   private userProfile = signal<User | null>(null);
@@ -22,11 +22,11 @@ export class AuthService {
   private _isLoggedIn = signal<boolean>(!!localStorage.getItem('token'));
   public isLoggedIn = this._isLoggedIn.asReadonly();
 
-  constructor() {
+  constructor(private http: HttpClient) {
     const token = this.getToken();
     if (token) {
       this.getProfile().subscribe({
-        error: () => this.logout(), 
+        error: () => this.logout(),
       });
     }
   }

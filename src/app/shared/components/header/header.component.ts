@@ -26,15 +26,21 @@ import { Signal } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  public authService = inject(AuthService);
-  private cartService = inject(CartService);
-  private router = inject(Router);
-  private toastr = inject(ToastrService);
-  private dialog = inject(MatDialog);
+  // public authService = inject(AuthService);
+  // private cartService = inject(CartService);
+  // private router = inject(Router);
+  // private toastr = inject(ToastrService);
+  // private dialog = inject(MatDialog);
 
   cartCount = 0;
 
-  constructor() {
+  constructor(
+    public authService: AuthService,
+    private cartService: CartService,
+    private router: Router,
+    private toastr: ToastrService,
+    private dialog: MatDialog
+  ) {
     this.cartService.cart$.subscribe(
       (items) => (this.cartCount = items.length)
     );
