@@ -11,16 +11,14 @@ export class CartService {
   cart$ = this._cart.asObservable();
 
   constructor() {
-    // Inicializar desde localStorage al cargar el servicio
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       this.cartItems = JSON.parse(savedCart);
-      this._cart.next([...this.cartItems]); // Enviamos copia inicial
+      this._cart.next([...this.cartItems]);
     }
   }
 
   addToCart(product: Product) {
-    // Usamos el operador spread [...] para crear una nueva referencia
     this.cartItems = [...this.cartItems, product];
     this.saveCart();
   }
@@ -37,7 +35,6 @@ export class CartService {
 
   private saveCart() {
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
-    // IMPORTANTE: Enviamos una copia nueva del arreglo
     this._cart.next([...this.cartItems]);
   }
 }
