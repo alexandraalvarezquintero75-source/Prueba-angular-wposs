@@ -93,7 +93,6 @@ export class ProductFormComponent implements OnInit {
       this.productService.updateProduct(this.productId, productData).subscribe({
         next: () => this.router.navigate(['/admin/products']),
         error: (err: Error) => {
-          // Agregamos el tipo Error aquí
           console.error(err);
           alert('Error al actualizar');
         },
@@ -102,7 +101,6 @@ export class ProductFormComponent implements OnInit {
       this.productService.createProduct(productData).subscribe({
         next: () => this.router.navigate(['/admin/products']),
         error: (err: Error) => {
-          // Agregamos el tipo Error aquí
           console.error(err);
           alert('Error al crear');
         },

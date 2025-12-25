@@ -26,7 +26,7 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       this.getProfile().subscribe({
-        error: () => this.logout(), // Si el token expiró, limpiamos
+        error: () => this.logout(), 
       });
     }
   }
@@ -45,15 +45,6 @@ export class AuthService {
         switchMap(() => this.getProfile())
       );
   }
-
-  // getProfile(): Observable<User> {
-  //   return this.http.get<User>(`${this.API_URL}/auth/profile`).pipe(
-  //     tap((user) => {
-  //       this.userProfile.set(user);
-  //       console.log('Perfil cargado:', user.role);
-  //     })
-  //   );
-  // }
   getProfile(): Observable<User> {
     const token = this.getToken();
 

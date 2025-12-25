@@ -1,0 +1,68 @@
+.form-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // Define las 2 columnas iguales
+    gap: 20px;
+    margin-bottom: 24px;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      // Clase que anula las dos columnas y ocupa todo el ancho
+      &.full-width {
+        grid-column: span 2;
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: center; // Centra los botones horizontalmente
+    gap: 16px;              // Espacio entre los dos botones
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eeeeee;
+
+    button {
+      padding: 0 24px;      // Les da un poco más de cuerpo a los botones
+    }
+  }
+}
+
+// Vista previa centrada
+.preview-section {
+  display: flex;
+  align-items: center;
+
+  .image-wrapper {
+    margin-top: 10px;
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+// Responsive: volver a 1 columna en móviles
+@media (max-width: 600px) {
+  .form-container .form-grid {
+    grid-template-columns: 1fr;
+
+    .form-group.full-width {
+      grid-column: span 1;
+    }
+  }
+}

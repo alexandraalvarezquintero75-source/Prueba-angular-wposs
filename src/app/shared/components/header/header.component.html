@@ -8,7 +8,7 @@
     <span style="font-weight: bold">Mi E-Commerce</span>
   </span>
 
-    <!-- <span class="spacer"></span> -->
+  <!-- <span class="spacer"></span> -->
 
   <div class="left-section">
     <button mat-button routerLink="/home" routerLinkActive="active">
@@ -18,7 +18,7 @@
 
   <span class="spacer"></span>
 
-  <div class="right-section">
+  <!-- <div class="right-section">
     <button mat-button routerLink="/cart">🛒 Carrito ({{ cartCount }})</button>
 
     @if (authService.isLoggedIn()) {
@@ -27,6 +27,21 @@
     <button mat-raised-button color="warn" (click)="onLogout()">
       Cerrar Sesión
     </button>
+    } @else {
+    <button mat-raised-button routerLink="/admin/products">Iniciar Sesión</button>
+    }
+  </div> -->
+  <div class="right-section">
+    <button mat-button routerLink="/cart">🛒 Carrito ({{ cartCount }})</button>
+
+    @if (authService.isLoggedIn()) { @if (authService.isAdmin()) {
+    <button mat-button routerLink="/admin/products">Administración</button>
+    }
+
+    <button mat-raised-button color="warn" (click)="onLogout()">
+      Cerrar Sesión
+    </button>
+
     } @else {
     <button mat-raised-button routerLink="/login">Iniciar Sesión</button>
     }

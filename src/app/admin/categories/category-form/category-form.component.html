@@ -1,1 +1,42 @@
-<p>category-form works!</p>
+<div class="form-container">
+  <header class="form-header">
+    <h1>{{ isEdit ? 'Editar' : 'Nueva' }} Categoría</h1>
+    <p>Define el nombre y la imagen representativa de la categoría.</p>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="saveCategory()" class="product-form">
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Nombre de la Categoría</label>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="name" placeholder="Categoría">
+          <mat-error *ngIf="form.get('name')?.hasError('required')">El nombre es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <label>URL de la Imagen</label>
+        <mat-form-field appearance="outline">
+          <input matInput formControlName="image" placeholder="https://...">
+          <mat-icon matSuffix>link</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group full-width preview-section" *ngIf="form.get('image')?.value">
+        <label>Vista previa:</label>
+        <div class="image-wrapper">
+          <img [src]="form.get('image')?.value" alt="Vista previa">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+      <button mat-button type="button" routerLink="/admin/categories">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        <mat-icon>check</mat-icon> {{ isEdit ? 'Actualizar' : 'Guardar' }}
+      </button>
+    </div>
+  </form>
+</div>
