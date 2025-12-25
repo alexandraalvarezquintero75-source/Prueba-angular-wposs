@@ -2,28 +2,32 @@
   height: 100vh;
 }
 
+
 .sidebar {
   width: 260px;
   background: #2c3e50;
   color: white;
+}
 
-  .sidebar-header {
-    padding: 30px 20px;
-    text-align: center;
-    background: #1a252f;
 
-    .admin-avatar {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-      border: 2px solid #00e5ff;
-    }
+.sidebar-header {
+  padding: 30px 20px;
+  text-align: center;
+  background: #1a252f;
+
+  .admin-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #00e5ff;
   }
 }
 
+
 .main-content {
   background: #f4f7f6;
+  height: 100%;
 }
 
 .active-link {
@@ -31,37 +35,49 @@
   border-left: 4px solid #00e5ff;
 }
 
-.page-container {
-  padding: 25px;
-}
 mat-nav-list {
-    a[mat-list-item] {
-      // Forzamos el color blanco en el texto y el icono
-      --mdc-list-list-item-label-text-color: #ffffff;
-      --mdc-list-list-item-supporting-text-color: #ffffff;
+  a[mat-list-item] {
+    --mdc-list-list-item-label-text-color: #ffffff;
+    --mdc-list-list-item-supporting-text-color: #ffffff;
 
-      .mat-icon {
-        color: white !important;
-      }
+    .mat-icon {
+      color: white !important;
+    }
 
-      // Estilo para el texto específico de Material 15+
+    span[matListItemTitle] {
+      color: white !important;
+      font-weight: 400;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active-link {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-left: 4px solid #3f51b5;
+
       span[matListItemTitle] {
-        color: white !important;
-        font-weight: 400;
-      }
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      // Estilo para cuando el link está activo (clase que tienes en el HTML)
-      &.active-link {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-left: 4px solid #3f51b5; // Una línea de color para resaltar
-
-        span[matListItemTitle] {
-          font-weight: bold;
-        }
+        font-weight: bold;
       }
     }
   }
+}
+
+.page-container {
+  padding: 25px;
+}
+@media (max-width: 960px) {
+  .sidebar {
+    width: 100vw;
+  }
+
+  mat-sidenav {
+    position: fixed;
+    z-index: 1000;
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+  }
+}

@@ -1,6 +1,7 @@
 .header-container {
   display: flex;
   align-items: center;
+  padding: 0 16px;
 }
 
 .left-section,
@@ -10,18 +11,32 @@
   gap: 12px;
 }
 
+/* Spacer */
 .spacer {
   flex: 1 1 auto;
 }
+
+button {
+  padding: 0 8px;
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
-  .left-section,
+  .left-section {
+    display: none;
+  }
+
   .right-section {
     gap: 6px;
   }
-}
-button {
-    padding: 0 8px;
+
+  button {
+    font-size: 0.85rem;
   }
+}
 
-
-
+@media (min-width: 769px) {
+  .left-section {
+    display: flex;
+  }
+}

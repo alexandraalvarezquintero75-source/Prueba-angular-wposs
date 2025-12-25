@@ -18,31 +18,16 @@
 
   <span class="spacer"></span>
 
-  <!-- <div class="right-section">
-    <button mat-button routerLink="/cart">🛒 Carrito ({{ cartCount }})</button>
-
-    @if (authService.isLoggedIn()) {
-    <button mat-button routerLink="/admin/products">Administración</button>
-
-    <button mat-raised-button color="warn" (click)="onLogout()">
-      Cerrar Sesión
-    </button>
-    } @else {
-    <button mat-raised-button routerLink="/admin/products">Iniciar Sesión</button>
-    }
-  </div> -->
   <div class="right-section">
-    <button mat-button routerLink="/cart">🛒 Carrito ({{ cartCount }})</button>
+    <button mat-button routerLink="/cart">🛒 Carrito ({{ cartCount() }})</button>
 
     @if (authService.isLoggedIn()) { @if (authService.isAdmin()) {
     <button mat-button routerLink="/admin/products">Administración</button>
-    }
-
+    } @if (!authService.isAdmin()) {
     <button mat-raised-button color="warn" (click)="onLogout()">
       Cerrar Sesión
     </button>
-
-    } @else {
+    } } @else {
     <button mat-raised-button routerLink="/login">Iniciar Sesión</button>
     }
   </div>

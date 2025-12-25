@@ -28,7 +28,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
     MatIconModule,
     MatPaginatorModule,
     MatTooltipModule,
-  ],
+    MatDialogModule  ],
   templateUrl: './admin-category-table.component.html',
   styleUrls: ['./admin-category-table.component.scss'],
 })

@@ -8,13 +8,18 @@ import {
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+// Material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+// Models & Services
 import { Category } from '../../../shared/components/models/category.model';
 import { ProductService } from '../../../core/services/product.service';
+
+// Toastr
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-category-form',
@@ -33,14 +38,15 @@ import { ProductService } from '../../../core/services/product.service';
 })
 export class CategoryFormComponent implements OnInit {
   form!: FormGroup;
-  isEdit: boolean = false;
+  isEdit = false;
   categoryId: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.buildForm();
   }
@@ -70,8 +76,11 @@ export class CategoryFormComponent implements OnInit {
           image: category.image,
         });
       },
-      error: (err: Error) => {
-        console.error('Error al cargar la categoría:', err);
+      error: () => {
+        this.toastr.error(
+          'No se pudo cargar la categoría',
+          'Error'
+        );
       },
     });
   }
@@ -88,18 +97,36 @@ export class CategoryFormComponent implements OnInit {
       this.productService
         .updateCategory(this.categoryId, categoryData)
         .subscribe({
-          next: () => this.handleSuccess(),
-          error: (err: Error) => console.error('Error al actualizar:', err),
+          next: () => {
+            this.toastr.success(
+              'Categoría actualizada correctamente',
+              'Sistema'
+            );
+            this.router.navigate(['/admin/categories']);
+          },
+          error: () => {
+            this.toastr.error(
+              'No se pudo actualizar la categoría',
+              'Error'
+            );
+          },
         });
     } else {
       this.productService.createCategory(categoryData).subscribe({
-        next: () => this.handleSuccess(),
-        error: (err: Error) => console.error('Error al crear:', err),
+        next: () => {
+          this.toastr.success(
+            'Categoría creada correctamente',
+            'Sistema'
+          );
+          this.router.navigate(['/admin/categories']);
+        },
+        error: () => {
+          this.toastr.error(
+            'No se pudo crear la categoría',
+            'Error'
+          );
+        },
       });
     }
-  }
-
-  private handleSuccess(): void {
-    this.router.navigate(['/admin/categories']);
   }
 }

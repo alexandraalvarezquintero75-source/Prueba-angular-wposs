@@ -1,12 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { CartService } from '../../core/services/cart.service';
-import { Product } from '../../shared/components/models/product.model';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
 
@@ -17,30 +15,24 @@ import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/c
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit {
-  // private dialog = inject(MatDialog);
-  // private cartService = inject(CartService);
-  // private toastr = inject(ToastrService);
+export class CartComponent {
+  private cartService = inject(CartService);
+  private dialog = inject(MatDialog);
+  private toastr = inject(ToastrService);
 
-  cartItems: Product[] = [];
 
-  constructor(
-    private dialog: MatDialog,
-    private cartService: CartService,
-    private toastr: ToastrService
-  ) {
-    this.cartService.cart$
-      .pipe(takeUntilDestroyed())
-      .subscribe((items) => (this.cartItems = items));
-  }
+  cartItems = this.cartService.cart;
 
-  ngOnInit(): void {}
+  total = computed(() =>
+    this.cartItems().reduce((sum, item) => sum + item.price, 0)
+  );
 
   removeItem(productId: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: { message: '¿Deseas quitar este producto del carrito?' },
     });
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.cartService.removeFromCart(productId);
@@ -52,7 +44,6 @@ export class CartComponent implements OnInit {
   clearCart() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
-
       data: { message: '¿Estás seguro de que deseas vaciar todo el carrito?' },
     });
 
@@ -62,9 +53,5 @@ export class CartComponent implements OnInit {
         this.toastr.info('El carrito se ha vaciado', 'Sistema');
       }
     });
-  }
-
-  get total(): number {
-    return this.cartItems.reduce((sum, item) => sum + item.price, 0);
   }
 }
