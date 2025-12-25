@@ -51,25 +51,29 @@ export class AdminLayoutComponent implements OnInit {
   }
 
   toggleSidenav() {
-    this.sidenav.toggle();
+    if (this.sidenav) {
+      this.sidenav.toggle();
+    }
   }
 
   onLogout() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
-      data: { message: '¿Estás seguro de cerrar sesión' },
+      data: { message: '¿Estás seguro de cerrar sesión?' },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.authService.logout();
         this.router.navigate(['/login']);
-        this.toastr.info('Sesion cerrada con exito', 'Sistema');
+        this.toastr.info('Sesión cerrada con éxito', 'Sistema');
       }
     });
   }
 
   get currentRouteTitle(): string {
-    return this.router.url.includes('products') ? 'Productos' : 'Categorías';
+    return this.router.url.includes('products')
+      ? 'Productos'
+      : 'Categorías';
   }
 }

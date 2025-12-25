@@ -1,5 +1,10 @@
 <mat-sidenav-container class="admin-container">
-  <mat-sidenav mode="side" opened class="sidebar">
+  <mat-sidenav
+    #sidenav
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="!isMobile"
+    class="sidebar"
+  >
     <div class="sidebar-header">
       <img
         [src]="authService.currentUser()?.avatar"
@@ -15,6 +20,7 @@
         mat-list-item
         routerLink="/admin/products"
         routerLinkActive="active-link"
+        (click)="isMobile && sidenav.close()"
       >
         <mat-icon matListItemIcon>shopping_bag</mat-icon>
         <span matListItemTitle>Productos</span>
@@ -24,6 +30,7 @@
         mat-list-item
         routerLink="/admin/categories"
         routerLinkActive="active-link"
+        (click)="isMobile && sidenav.close()"
       >
         <mat-icon matListItemIcon>category</mat-icon>
         <span matListItemTitle>Categorías</span>
@@ -40,6 +47,15 @@
 
   <mat-sidenav-content class="main-content">
     <header class="top-bar">
+      <button
+        mat-icon-button
+        class="menu-btn"
+        *ngIf="isMobile"
+        (click)="toggleSidenav()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+
       <span>Gestión de E-commerce / {{ currentRouteTitle }}</span>
     </header>
 
