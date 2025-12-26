@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -24,15 +24,19 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
-  cartService = inject(CartService);
-
+export class HeaderComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private router: Router,
+    public cartService: CartService,
     private toastr: ToastrService,
     private dialog: MatDialog
   ) {}
+
+  ngOnInit(): void {
+    console.log(' Cart inicial:', this.cartService.cart());
+    console.log('Count inicial:', this.cartService.cartCount());
+  }
 
   onLogout() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
