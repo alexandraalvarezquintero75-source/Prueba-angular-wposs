@@ -16,7 +16,7 @@ export class ProductCardComponent {
   @Input() product!: Product;
   @Output() addToCard = new EventEmitter<Product>();
 
-  onAddToCart(event: Event) {
+  onAddToCard(event: Event) {
     event.stopPropagation();
     this.addToCard.emit(this.product);
     console.log('Producto añadido:', this.product.title);

@@ -1,75 +1,43 @@
-<!--
 <div class="cart-container">
-  <h2>Carrito de compras</h2>
-
-  @if (cartItems.length === 0) {
-  <p>Tu carrito está vacío</p>
-  } @else {
-
-  <mat-list>
-    @for (item of cartItems; track item.id) {
-    <mat-list-item>
-      <img matListItemAvatar [src]="item.images[0]" [alt]="item.title" />
-
-      <div matListItemTitle>{{ item.title }}</div>
-      <div matListItemLine class="price">{{ item.price | currency }}</div>
-
-      <button mat-button   color="warn" (click)="removeItem(item.id)">
-        Eliminar
-      </button>
-    </mat-list-item>
-    }
-  </mat-list>
-
-  <div class="cart-summary">
-    <h3>Total: {{ total | currency }}</h3>
-
-    <button mat-raised-button color="warn" (click)="clearCart()">
-      Vaciar carrito
-    </button>
-  </div>
-  }
-</div> -->
-<div class="cart-container">
-  <h2>Carrito de compras</h2>
-
   @if (cartItems().length === 0) {
-    <p>Tu carrito está vacío</p>
+    <div class="empty-state" style="text-align: center; padding: 50px;">
+      <mat-icon style="font-size: 48px; width: 48px; height: 48px; color: #ccc;">shopping_cart</mat-icon>
+      <p>Tu carrito está vacío</p>
+      <button mat-flat-button class="btn-custom" routerLink="/home">Ir a la tienda</button>
+    </div>
   } @else {
+    <h2>Mi Carrito</h2>
 
-    <mat-list>
+    <div class="cart-list">
       @for (item of cartItems(); track item.id) {
-        <mat-list-item>
-          <img
-            matListItemAvatar
-            [src]="item.images[0]"
-            [alt]="item.title"
-          />
+        <div class="cart-item">
+          <img [src]="item.images[0]" [alt]="item.title" class="item-image" />
 
-          <div matListItemTitle>{{ item.title }}</div>
-          <div matListItemLine class="price">
-            {{ item.price | currency }}
+          <div class="item-info">
+            <span class="item-title">{{ item.title }}</span>
+            <span class="item-meta">{{ item.quantity }}x {{ item.price | currency }}</span>
           </div>
 
-          <button
-            mat-button
-            color="warn"
-            (click)="removeItem(item.id)"
-          >
-            Eliminar
+          <div class="item-subtotal">
+            <span style="font-size: 0.75rem; color: #999; display: block;">total</span>
+            <span class="subtotal-val">{{ (item.price * item.quantity) | currency }}</span>
+          </div>
+
+          <button mat-icon-button color="warn" class="btn-remove" (click)="removeItem(item.id)">
+            <mat-icon>delete_outline</mat-icon>
           </button>
-        </mat-list-item>
+        </div>
       }
-    </mat-list>
+    </div>
 
     <div class="cart-summary">
-      <h3>Total: {{ total() | currency }}</h3>
+      <div class="total-box">
+        <span style="color: #666; font-size: 0.9rem;">Total a pagar</span>
+        <h3>{{ total() | currency }}</h3>
+      </div>
 
-      <button
-        mat-raised-button
-        color="warn"
-        (click)="clearCart()"
-      >
+      <button mat-stroked-button color="warn" (click)="clearCart()">
+        <mat-icon>delete_sweep</mat-icon>
         Vaciar carrito
       </button>
     </div>

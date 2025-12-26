@@ -17,9 +17,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  // private productService = inject(ProductService);
-  // private cartService = inject(CartService);
-
   products: Product[] = [];
   categories: Category[] = [];
 

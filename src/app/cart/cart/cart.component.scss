@@ -1,15 +1,109 @@
-.cart-container{
-  max-width: 800px;
+.cart-container {
+  max-width: 850px;
   margin: 2rem auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
 
+  h2 {
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #333;
+  }
 }
 
-.cart-summary{
+.cart-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto auto;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f8f8f8;
+  }
+
+  .item-info {
+    .item-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .item-meta {
+      font-size: 0.9rem;
+      color: #7dd327;
+      font-weight: 700;
+    }
+  }
+
+  .item-subtotal {
+    text-align: right;
+    padding: 0 15px;
+    .subtotal-val {
+      display: block;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #333;
+    }
+  }
+}
+.btn-custom {
+  background-color: #2c3e50 !important;
+  color: white !important;
+}
+
+.btn-outline-custom {
+  border-color: #2c3e50 !important;
+  color: #2c3e50 !important;
+}
+
+.cart-summary {
+  margin-top: 30px;
+  padding: 24px;
+  background: #fcfcfc;
+  border-radius: 15px;
+  border: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+
+  .total-box {
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #222;
+    }
+  }
 }
-.price{
-  color: rgb(125, 211, 39);
+
+// móviles
+@media (max-width: 600px) {
+  .cart-item {
+    grid-template-columns: 60px 1fr auto;
+    gap: 12px;
+
+    .item-subtotal { display: none; }
+    .btn-remove { grid-column: 3; }
+  }
+
+  .cart-summary {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
 }

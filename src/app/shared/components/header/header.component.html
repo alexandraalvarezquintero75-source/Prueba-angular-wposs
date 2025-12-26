@@ -8,27 +8,31 @@
     <span style="font-weight: bold">Mi E-Commerce</span>
   </span>
 
-  <!-- <span class="spacer"></span> -->
-
-  <div class="left-section">
+  <!-- <div class="left-section">
     <button mat-button routerLink="/home" routerLinkActive="active">
       Inicio
     </button>
-  </div>
+  </div> -->
 
   <span class="spacer"></span>
 
   <div class="right-section">
-    <button mat-button routerLink="/cart">🛒 Carrito ({{ cartCount() }})</button>
-
-    @if (authService.isLoggedIn()) { @if (authService.isAdmin()) {
-    <button mat-button routerLink="/admin/products">Administración</button>
-    } @if (!authService.isAdmin()) {
-    <button mat-raised-button color="warn" (click)="onLogout()">
-      Cerrar Sesión
+    <button mat-button routerLink="/cart">
+      🛒 Carrito({{ cartService.cartCount() }})
     </button>
-    } } @else {
-    <button mat-raised-button routerLink="/login">Iniciar Sesión</button>
-    }
+
+    <ng-container *ngIf="authService.isLoggedIn(); else loginBtn">
+      <ng-container *ngIf="authService.isAdmin(); else logoutBtn">
+        <button mat-button routerLink="/admin/products">Administración</button>
+      </ng-container>
+      <ng-template #logoutBtn>
+        <button mat-raised-button color="warn" (click)="onLogout()">
+          Cerrar Sesión
+        </button>
+      </ng-template>
+    </ng-container>
+    <ng-template #loginBtn>
+      <button mat-raised-button routerLink="/login">Iniciar Sesión</button>
+    </ng-template>
   </div>
 </mat-toolbar>

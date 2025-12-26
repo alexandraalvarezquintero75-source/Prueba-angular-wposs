@@ -32,13 +32,13 @@
     border: 2px solid transparent;
     transition: 0.3s;
 
-    &.active { border-color:rgb(66, 208, 61) } 
+    &.active { border-color:rgb(66, 208, 61) }
     &:hover { opacity: 0.8; }
   }
 }
 
 .add-to-cart-btn {
-  background: rgb(66, 208, 61);
+  background:  #2c3e50;
   color: white;
   border: none;
   padding: 15px 30px;
@@ -49,5 +49,5 @@
   margin-top: 20px;
   transition: 0.3s;
 
-  &:hover { transform: scale(1.02); background: rgb(66, 208, 61) }
+  &:hover { transform:  #2c3e50 }
 }

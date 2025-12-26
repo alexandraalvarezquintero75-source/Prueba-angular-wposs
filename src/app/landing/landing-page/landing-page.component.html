@@ -1,5 +1,4 @@
 <div class="container">
-  <!-- FILTROS -->
   <div class="filter-section">
     <mat-chip-listbox
       class="category-chips"
@@ -17,7 +16,6 @@
     </mat-chip-listbox>
   </div>
 
-  <!-- PRODUCTOS -->
   <div class="product-grid">
     @for (product of products; track product.id) {
     <app-product-card

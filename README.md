@@ -1,59 +1,65 @@
-# PruebaAngular
+E-commerce Angular - Integración con Platzi Fake Store API
+Proyecto desarrollado como parte de la integración frontend para la gestión de productos, categorías y autenticación utilizando la Fake Store REST API de Platzi.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+Link del Proyecto (Vercel): []
 
-## Development server
+Características del Proyecto
+Este proyecto implementa un flujo completo de e-commerce con Angular, incluyendo:
 
-To start a local development server, run:
+Autenticación JWT: Inicio de sesión seguro con almacenamiento de tokens.
 
-```bash
+Gestión de Productos (CRUD): Visualización en tarjetas para clientes y tabla administrativa para gestión completa.
+
+Gestión de Categorías (CRUD): Organización de productos por categorías con validaciones de asociación.
+
+Carrito de Compras: Persistencia de productos seleccionados utilizando LocalStorage y gestión de cantidades.
+
+Roles y Permisos: Protección de rutas mediante AuthGuard para diferenciar accesos entre Administradores y Clientes.
+
+Tecnologías Utilizadas
+Angular v19+: Framework principal.
+
+Angular Material: Componentes de interfaz de usuario.
+
+Signals & Computed: Gestión de estado reactivo
+
+Reactive Forms: Formularios para CRUD y Login.
+
+Platzi Fake Store API: Backend REST para el consumo de datos.
+
+Ngx-Toastr: Mensajes de notificación al usuario.
+
+Instalación y Configuración
+Sigue estos pasos para ejecutar el proyecto localmente:
+
+Clonar el repositorio:
+git clone [https://github.com/alexandraalvarezquintero75-source/Prueba-angular-wposs.git]
+cd [prueba-angular]
+Instalar dependencias:
+
+npm install
+
+Ejecutar el servidor de desarrollo
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Para este proyecto, decidi guardar el token JWT en LocalStorage.
 
-## Code scaffolding
+Elegi LocalStorage para guardar datos en el navegador y que no se pierdan al cerrar o recargar la página
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Requerimientos Funcionales Implementados
+Landing Page: Diseño basado en referencias de Dribbble con vista de productos y categorías.
 
-```bash
-ng generate component component-name
-```
+Módulo de Auth: Login funcional con protección de rutas privadas.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Panel Administrativo: Tablas para productos y categorías con formularios reactivos reutilizables.
 
-```bash
-ng generate --help
-```
+Carrito: Lógica de agrupación por ID y persistencia local.
 
-## Building
+Autor
+Nombre: Yelisa alexandra alvarez quintero
 
-To build the project run:
+Link de VERCEL[]
 
-```bash
-ng build
-```
+URL_DE_TU_REPOSITORIO:https://github.com/alexandraalvarezquintero75-source/Prueba-angular-wposs.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Capturas de pantalla:
