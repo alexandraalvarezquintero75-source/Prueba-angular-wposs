@@ -1,7 +1,7 @@
 E-commerce Angular - Integración con Platzi Fake Store API
 Proyecto desarrollado como parte de la integración frontend para la gestión de productos, categorías y autenticación utilizando la Fake Store REST API de Platzi.
 
-Link del Proyecto (Vercel): []
+Link del Proyecto (Vercel): [https://prueba-angular-wposs.vercel.app/home]
 
 Características del Proyecto
 Este proyecto implementa un flujo completo de e-commerce con Angular, incluyendo:
@@ -58,8 +58,17 @@ Carrito: Lógica de agrupación por ID y persistencia local.
 Autor
 Nombre: Yelisa alexandra alvarez quintero
 
-Link de VERCEL[]
+Link de VERCEL[https://prueba-angular-wposs.vercel.app/home]
+Credenciales para inicio de sesion:
+Administrador [
+Correo
+admin@mail.com
+Contraseña
+admin123]
+
+Usuario[
+Puedes crear un usuario directamente en el registro
+]
 
 URL_DE_TU_REPOSITORIO:https://github.com/alexandraalvarezquintero75-source/Prueba-angular-wposs.
 
-Capturas de pantalla:
