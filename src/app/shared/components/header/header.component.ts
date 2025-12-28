@@ -9,6 +9,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatFormFieldModule,
     MatDialogModule,
+    MatIconModule
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],

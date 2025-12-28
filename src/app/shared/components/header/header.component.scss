@@ -21,6 +21,63 @@ button {
   white-space: nowrap;
 }
 
+.cart-button {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px !important;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .cart-icon {
+    position: relative;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .cart-text {
+    font-weight: 500;
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: -10px;
+    left: 17px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 0 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 2px solid white;
+    animation: pulse 0.3s ease;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 768px) {
   .left-section {
     display: none;
@@ -32,6 +89,17 @@ button {
 
   button {
     font-size: 0.85rem;
+  }
+
+  .cart-button {
+    .cart-text {
+      display: none;
+    }
+
+    .cart-badge {
+      top: -4px;
+      left: 14px;
+    }
   }
 }
 
