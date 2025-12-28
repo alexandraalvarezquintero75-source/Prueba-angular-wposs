@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CartService } from '../../core/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/confirm-dialog.component';
-import { RouterLink } from "@angular/router";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +19,7 @@ import { RouterLink } from "@angular/router";
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
-    RouterLink
+    RouterModule,
   ],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
@@ -32,10 +32,12 @@ export class CartComponent {
   cartItems = this.cartService.cart;
 
   total = computed(() =>
-    this.cartItems().reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    this.cartItems().reduce((sum, item) => sum + item.price * item.quantity, 0)
   );
 
-  removeItem(productId: number) {
+  removeItem(event: Event, productId: number) {
+    event.stopPropagation();
+    event.preventDefault();
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: { message: '¿Deseas quitar este producto del carrito?' },

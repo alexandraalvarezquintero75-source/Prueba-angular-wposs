@@ -10,7 +10,7 @@
 
     <div class="cart-list">
       @for (item of cartItems(); track item.id) {
-        <div class="cart-item">
+        <div class="cart-item" [routerLink]="['/product', item.id]" style="cursor: pointer;">
           <img [src]="item.images[0]" [alt]="item.title" class="item-image" />
 
           <div class="item-info">
@@ -23,7 +23,7 @@
             <span class="subtotal-val">{{ (item.price * item.quantity) | currency }}</span>
           </div>
 
-          <button mat-icon-button color="warn" class="btn-remove" (click)="removeItem(item.id)">
+          <button mat-icon-button color="warn" class="btn-remove" (click)="removeItem($event, item.id)">
             <mat-icon>delete_outline</mat-icon>
           </button>
         </div>
