@@ -13,3 +13,23 @@
   align-items: center;
   gap: 10px;
 }
+.main-footer {
+  margin-top: 60px;
+  width: 100%;
+  position: relative;
+}
+
+.footer-bottom {
+  background-color: #1a252f;
+  color: #6c757d;
+  text-align: center;
+  padding: 20px 12px;
+  font-size: 0.8rem;
+  border-top: 1px solid #343a40;
+}
+
+.contact p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
