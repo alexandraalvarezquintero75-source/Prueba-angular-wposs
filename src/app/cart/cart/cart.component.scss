@@ -38,7 +38,7 @@
   }
 
   .item-info {
-    min-width: 0; // Crucial para que funcione text-overflow
+    min-width: 0;
     overflow: hidden;
 
     .item-title {
@@ -48,7 +48,7 @@
       margin-bottom: 6px;
       color: #333;
 
-      // Limitar a 2 líneas
+     
       display: -webkit-box;
       -webkit-line-clamp: 2;
         line-clamp: 2;
