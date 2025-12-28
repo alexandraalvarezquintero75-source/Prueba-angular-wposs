@@ -48,6 +48,41 @@
       }
     }
 
+    .action-buttons {
+  display: flex;
+  gap: 8px;
+}
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn, .delete-btn {
+  transition: all 0.2s ease-in-out;
+}
+
+
+.edit-btn:hover {
+  background-color: rgba(16, 135, 233, 0.1);
+  transform: scale(1.1);
+}
+
+.edit-btn:hover mat-icon {
+  color: #1a252f;
+}
+
+.delete-btn:hover {
+  background-color: rgba(211, 47, 47, 0.1);
+  transform: scale(1.1);
+}
+
+.delete-btn:hover mat-icon {
+  color: #d32f2f;
+}
+
+.edit-btn:active, .delete-btn:active {
+  transform: scale(0.95);
+}
 
     .mat-mdc-paginator {
       background-color: #f8f9fa;
@@ -63,7 +98,7 @@
 
     .header-container {
       flex-direction: column;
-      align-items: stretch; 
+      align-items: stretch;
 
       button {
         width: 100%;

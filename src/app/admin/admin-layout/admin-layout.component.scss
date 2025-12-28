@@ -2,13 +2,11 @@
   height: 100vh;
 }
 
-
 .sidebar {
   width: 260px;
   background: #2c3e50;
   color: white;
 }
-
 
 .sidebar-header {
   padding: 30px 20px;
@@ -23,7 +21,6 @@
     border: 2px solid #00e5ff;
   }
 }
-
 
 .main-content {
   background: #f4f7f6;
@@ -67,9 +64,12 @@ mat-nav-list {
 .page-container {
   padding: 25px;
 }
+
+
+// Tablet
 @media (max-width: 960px) {
   .sidebar {
-    width: 100vw;
+    width: 280px;
   }
 
   mat-sidenav {
@@ -79,5 +79,20 @@ mat-nav-list {
 
   .main-content {
     margin-left: 0 !important;
+  }
+
+  .page-container {
+    padding: 20px;
+  }
+}
+
+// Móvil
+@media (max-width: 600px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  .page-container {
+    padding: 15px;
   }
 }
