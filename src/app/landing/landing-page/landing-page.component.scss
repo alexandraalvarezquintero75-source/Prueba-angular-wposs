@@ -2,13 +2,12 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 12px;
   box-sizing: border-box;
 }
 
-
 .filter-section {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .category-chips {
@@ -17,27 +16,48 @@
   gap: 8px;
   overflow-x: auto;
   padding-bottom: 8px;
+
+  // Ocultar scrollbar pero mantener funcionalidad
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .product-grid {
   display: grid;
   width: 100%;
-  gap: 24px;
-
-  grid-template-columns: 1fr;
+  gap: 12px;
+  grid-template-columns: repeat(2, 1fr); // 2 columnas en móvil por defecto
 }
 
-
+// Tablet pequeño: 3 columnas
 @media (min-width: 600px) {
+  .container {
+    padding: 16px;
+  }
+
   .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
 }
 
-
+// Desktop: 4 columnas
 @media (min-width: 960px) {
   .product-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+// Desktop grande: 5 columnas
+@media (min-width: 1280px) {
+  .product-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
   }
 }
 
@@ -46,15 +66,27 @@
   text-align: center;
   padding: 40px 16px;
   color: #666;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-}
 
-.no-products mat-icon {
-  font-size: 48px;
-  height: 48px;
-  width: 48px;
+  mat-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    color: #999;
+  }
+
+  .logo-cartOff {
+    img {
+      height: 80px;
+      margin: 0;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    margin: 0;
+  }
 }

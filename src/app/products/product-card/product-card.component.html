@@ -1,4 +1,4 @@
-<mat-card class="product-card">
+<!-- <mat-card class="product-card">
   <div class="card-clickable-area" [routerLink]="['/product', product.id]">
     <img mat-card-image [src]="product.images[0]" [alt]="product.title" />
 
@@ -16,6 +16,27 @@
       (click)="onAddToCard($event)"
     >
       Añadir al carrito
+    </button>
+  </mat-card-actions>
+</mat-card> -->
+<mat-card class="product-card" [routerLink]="['/product', product.id]">
+  <div class="card-image-container">
+    <img [src]="product.images[0]" [alt]="product.title" />
+  </div>
+
+  <mat-card-content>
+    <p class="price">{{ product.price | currency }}</p>
+    <h3 class="title">{{ product.title }}</h3>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button
+      mat-icon-button
+      class="add-to-cart-btn"
+      (click)="onAddToCard($event)"
+      [attr.aria-label]="'Añadir ' + product.title + ' al carrito'"
+    >
+      <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
