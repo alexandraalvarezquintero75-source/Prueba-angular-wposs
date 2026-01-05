@@ -35,8 +35,8 @@ Sigue estos pasos para ejecutar el proyecto localmente:
 Clonar el repositorio:
 git clone [https://github.com/alexandraalvarezquintero75-source/Prueba-angular-wposs.git]
 cd [prueba-angular]
-Instalar dependencias:
 
+Instalar dependencias:
 npm install
 
 Ejecutar el servidor de desarrollo
