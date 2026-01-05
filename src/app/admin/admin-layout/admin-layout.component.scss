@@ -1,4 +1,5 @@
 .admin-container {
+  min-height: calc(100vh - 56px);
   height: 100vh;
 }
 
@@ -25,6 +26,7 @@
 .main-content {
   background: #f4f7f6;
   height: 100%;
+  flex: 1;
 }
 
 .active-link {
