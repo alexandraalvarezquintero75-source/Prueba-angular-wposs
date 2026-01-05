@@ -8,6 +8,7 @@ import { CartService } from '../../core/services/cart.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { ToastrService } from 'ngx-toastr';
+import { CategoryService } from '../../core/services/category.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -23,6 +24,7 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private productService: ProductService,
+    private categoryService: CategoryService,
     private cartService: CartService
   ) {}
 
@@ -32,7 +34,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.productService.getCategories().subscribe({
+    this.categoryService.getCategories().subscribe({
       next: (data: Category[]) => (this.categories = data),
       error: (err) => {
         this.toastr.error('No se pudieron cargar las categorías', 'Error');
@@ -50,7 +52,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   filterByCategory(id: number): void {
-    this.productService.getProductsByCategory(id).subscribe({
+    this.categoryService.getProductsByCategory(id).subscribe({
       next: (data: Product[]) => (this.products = data),
       error: (err) => {
         this.toastr.error('No se pudieron filtrar los productos', 'Error');

@@ -56,12 +56,6 @@ export class LoginComponent {
           duration: 2000,
         });
 
-        //   if (this.authService.isAdmin()) {
-        //     this.router.navigate(['/admin/products']); // Directo a la gestión
-        //   } else {
-        //     this.router.navigate(['/home']);
-        //   }
-        // },
         if (user.role === 'admin') {
           this.router.navigate(['/admin/products']);
         } else {

@@ -13,7 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Category } from '../../../shared/components/models/category.model';
 import { ProductService } from '../../../core/services/product.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-
+import { CategoryService } from '../../../core/services/category.service';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
@@ -28,13 +28,15 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
     MatIconModule,
     MatPaginatorModule,
     MatTooltipModule,
-    MatDialogModule  ],
+    MatDialogModule,
+  ],
   templateUrl: './admin-category-table.component.html',
   styleUrls: ['./admin-category-table.component.scss'],
 })
 export class AdminCategoryTableComponent implements OnInit {
   constructor(
     private productService: ProductService,
+    private categoryService: CategoryService,
     private toastr: ToastrService,
     private dialog: MatDialog
   ) {}
@@ -49,12 +51,14 @@ export class AdminCategoryTableComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.productService.getCategories().subscribe({
+    this.categoryService.getCategories().subscribe({
       next: (data: Category[]) => {
         this.dataSource.data = data;
         setTimeout(() => (this.dataSource.paginator = this.paginator));
       },
-      error: (err: Error) => console.error('Error cargando categorías', err),
+      error: () => {
+        this.toastr.error('Error al cargar categorias', 'Error');
+      },
     });
   }
 
@@ -65,12 +69,12 @@ export class AdminCategoryTableComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.productService.deleteCategory(id).subscribe({
+        this.categoryService.deleteCategory(id).subscribe({
           next: () => {
             this.dataSource.data = this.dataSource.data.filter(
               (p) => p.id !== id
             );
-            this.toastr.success('categoría eliminadaccorrectamente', 'Sistema');
+            this.toastr.success('categoría eliminada correctamente', 'Sistema');
           },
           error: (err) => {
             console.error(err);

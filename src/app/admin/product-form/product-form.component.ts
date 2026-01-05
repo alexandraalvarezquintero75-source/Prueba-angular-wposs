@@ -15,10 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 
-
 import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../shared/components/models/product.model';
 import { Category } from '../../shared/components/models/category.model';
+import { CategoryService } from '../../core/services/category.service';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -47,6 +47,7 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService
@@ -72,10 +73,9 @@ export class ProductFormComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.productService.getCategories().subscribe({
+    this.categoryService.getCategories().subscribe({
       next: (data) => (this.categories = data),
-      error: () =>
-        this.toastr.error('Error cargando categorías', 'Error'),
+      error: () => this.toastr.error('Error cargando categorías', 'Error'),
     });
   }
 
@@ -89,8 +89,7 @@ export class ProductFormComponent implements OnInit {
           categoryId: product.category.id,
         });
       },
-      error: () =>
-        this.toastr.error('No se pudo cargar el producto', 'Error'),
+      error: () => this.toastr.error('No se pudo cargar el producto', 'Error'),
     });
   }
 
@@ -102,33 +101,21 @@ export class ProductFormComponent implements OnInit {
     if (this.isEditMode && this.productId) {
       this.productService.updateProduct(this.productId, productData).subscribe({
         next: () => {
-          this.toastr.success(
-            'Producto actualizado correctamente',
-            'Sistema'
-          );
+          this.toastr.success('Producto actualizado correctamente', 'Sistema');
           this.router.navigate(['/admin/products']);
         },
         error: () => {
-          this.toastr.error(
-            'No se pudo actualizar el producto',
-            'Error'
-          );
+          this.toastr.error('No se pudo actualizar el producto', 'Error');
         },
       });
     } else {
       this.productService.createProduct(productData).subscribe({
         next: () => {
-          this.toastr.success(
-            'Producto creado correctamente',
-            'Sistema'
-          );
+          this.toastr.success('Producto creado correctamente', 'Sistema');
           this.router.navigate(['/admin/products']);
         },
         error: () => {
-          this.toastr.error(
-            'No se pudo crear el producto',
-            'Error'
-          );
+          this.toastr.error('No se pudo crear el producto', 'Error');
         },
       });
     }

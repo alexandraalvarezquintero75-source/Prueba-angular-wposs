@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 // Models & Services
 import { Category } from '../../../shared/components/models/category.model';
 import { ProductService } from '../../../core/services/product.service';
+import { CategoryService } from '../../../core/services/category.service';
 
 // Toastr
 import { ToastrService } from 'ngx-toastr';
@@ -44,6 +45,7 @@ export class CategoryFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService
@@ -69,7 +71,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   loadCategoryData(id: number): void {
-    this.productService.getCategoryById(id).subscribe({
+    this.categoryService.getCategoryById(id).subscribe({
       next: (category: Category) => {
         this.form.patchValue({
           name: category.name,
@@ -77,10 +79,7 @@ export class CategoryFormComponent implements OnInit {
         });
       },
       error: () => {
-        this.toastr.error(
-          'No se pudo cargar la categoría',
-          'Error'
-        );
+        this.toastr.error('No se pudo cargar la categoría', 'Error');
       },
     });
   }
@@ -94,7 +93,7 @@ export class CategoryFormComponent implements OnInit {
     const categoryData: Partial<Category> = this.form.value;
 
     if (this.isEdit && this.categoryId) {
-      this.productService
+      this.categoryService
         .updateCategory(this.categoryId, categoryData)
         .subscribe({
           next: () => {
@@ -105,26 +104,17 @@ export class CategoryFormComponent implements OnInit {
             this.router.navigate(['/admin/categories']);
           },
           error: () => {
-            this.toastr.error(
-              'No se pudo actualizar la categoría',
-              'Error'
-            );
+            this.toastr.error('No se pudo actualizar la categoría', 'Error');
           },
         });
     } else {
-      this.productService.createCategory(categoryData).subscribe({
+      this.categoryService.createCategory(categoryData).subscribe({
         next: () => {
-          this.toastr.success(
-            'Categoría creada correctamente',
-            'Sistema'
-          );
+          this.toastr.success('Categoría creada correctamente', 'Sistema');
           this.router.navigate(['/admin/categories']);
         },
         error: () => {
-          this.toastr.error(
-            'No se pudo crear la categoría',
-            'Error'
-          );
+          this.toastr.error('No se pudo crear la categoría', 'Error');
         },
       });
     }

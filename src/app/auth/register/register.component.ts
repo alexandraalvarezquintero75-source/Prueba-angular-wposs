@@ -34,10 +34,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  // private fb = inject(FormBuilder);
-  // private authService = inject(AuthService);
-  // private router = inject(Router);
-  // private toastr = inject(ToastrService);
   form!: FormGroup;
 
   constructor(
@@ -52,13 +48,6 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
-
-  // form = this.fb.nonNullable.group({
-  //   name: ['', [Validators.required, Validators.minLength(3)]],
-  //   email: ['', [Validators.required, Validators.email]],
-  //   password: ['', [Validators.required, Validators.minLength(4)]],
-  // });
-
   register() {
     if (this.form.valid) {
       const data = this.form.getRawValue();
