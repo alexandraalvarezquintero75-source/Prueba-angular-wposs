@@ -1,0 +1,35 @@
+.empty-cart-state {
+  text-align: center;
+  padding: 80px 20px;
+  @include card-style;
+  border-radius: 16px;
+
+  .empty-cart-icon {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 28px;
+    background: $bg-gray;
+    border-radius: 50%;
+    @include flex-center;
+
+    mat-icon { font-size: 70px; width: 70px; height: 70px; color: $text-light; }
+  }
+
+  h3 { font-size: 1.75rem; margin-bottom: 12px; color: $text-dark; font-weight: 600; }
+  p { color: $text-light; margin-bottom: 36px; }
+
+  .go-to-shop-button {
+    background: $primary-color;
+    color: white;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-weight: 600;
+    @include transition;
+
+    &:hover {
+      background: darken($primary-color, 8%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($primary-color, 0.25);
+    }
+  }
+}
