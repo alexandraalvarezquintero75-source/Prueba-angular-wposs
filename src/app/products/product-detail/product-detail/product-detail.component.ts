@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../../core/services/product.service';
@@ -15,10 +15,6 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./product-detail.component.scss'],
 })
 export class ProductDetailComponent implements OnInit {
-  // private route = inject(ActivatedRoute);
-  // private productService = inject(ProductService);
-  // private cartService = inject(CartService);
-
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,

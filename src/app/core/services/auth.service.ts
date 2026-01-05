@@ -13,14 +13,11 @@ interface LoginResponse {
 })
 export class AuthService {
   private API_URL = 'https://api.escuelajs.co/api/v1';
-  // private http = inject(HttpClient);
-
-  // Signals para manejar el estado global de la sesión
   private userProfile = signal<User | null>(null);
   public currentUser = this.userProfile.asReadonly();
 
   private _isLoggedIn = signal<boolean>(!!localStorage.getItem('token'));
-  public isLoggedIn = this._isLoggedIn.asReadonly();
+  public isLoggedIn = this._isLoggedIn.asReadonly(); //asReadonly() convierte  la signal en solo lectura
 
   constructor(private http: HttpClient) {
     const token = this.getToken();
@@ -82,7 +79,6 @@ export class AuthService {
     email: string;
     password: string;
   }): Observable<any> {
-    // const newUser = { ...data, avatar: 'https://picsum.photos/800' };
     const newUser = { ...data, avatar: 'https://placebear.com/640/480' };
     return this.http.post(`${this.API_URL}/users`, newUser);
   }

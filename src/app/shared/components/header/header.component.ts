@@ -36,8 +36,6 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(' Cart inicial:', this.cartService.cart());
-    console.log('Count inicial:', this.cartService.cartCount());
   }
 
   onLogout() {

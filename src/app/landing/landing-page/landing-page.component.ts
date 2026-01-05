@@ -34,21 +34,27 @@ export class LandingPageComponent implements OnInit {
   loadCategories(): void {
     this.productService.getCategories().subscribe({
       next: (data: Category[]) => (this.categories = data),
-      error: (err) => console.error('Error al cargar categorías', err),
+      error: (err) => {
+        this.toastr.error('No se pudieron cargar las categorías', 'Error');
+      },
     });
   }
 
   loadProducts(): void {
     this.productService.getProducts().subscribe({
       next: (data: Product[]) => (this.products = data),
-      error: (err) => console.error('Error al cargar productos', err),
+      error: (err) => {
+        this.toastr.error('No se pudieron cargar los productos', 'Error');
+      },
     });
   }
 
   filterByCategory(id: number): void {
     this.productService.getProductsByCategory(id).subscribe({
       next: (data: Product[]) => (this.products = data),
-      error: (err) => console.error('Error al filtrar productos', err),
+      error: (err) => {
+        this.toastr.error('No se pudieron filtrar los productos', 'Error');
+      },
     });
   }
 
