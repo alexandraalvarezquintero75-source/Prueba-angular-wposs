@@ -14,12 +14,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-// Models & Services
 import { Category } from '../../../shared/components/models/category.model';
-import { ProductService } from '../../../core/services/product.service';
 import { CategoryService } from '../../../core/services/category.service';
 
-// Toastr
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -44,7 +41,6 @@ export class CategoryFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private productService: ProductService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
     private router: Router,

@@ -33,7 +33,7 @@ export class ProductDetailComponent implements OnInit {
           this.product = data;
           this.mainImage = data.images[0];
         },
-        error: (err) => console.error('Error al cargar detalle', err),
+        error: (err) => { this.toastr.error('Error al cargar detalle', 'Error');}
       });
     }
   }

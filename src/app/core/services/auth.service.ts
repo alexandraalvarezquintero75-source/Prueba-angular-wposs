@@ -54,7 +54,6 @@ export class AuthService {
       .pipe(
         tap((user) => {
           this.userProfile.set(user);
-          console.log('Perfil cargado:', user.role);
         })
       );
   }

@@ -78,8 +78,7 @@ export class AdminProductTableComponent implements OnInit {
             );
             this.toastr.success('Producto eliminado correctamente', 'Sistema');
           },
-          error: (err) => {
-            console.error(err);
+          error: () => {
             this.toastr.error('No se pudo eliminar el producto', 'Error');
           },
         });

@@ -20,6 +20,5 @@ export class ProductCardComponent {
   onAddToCard(event: Event) {
     event.stopPropagation();
     this.addToCard.emit(this.product);
-    console.log('Producto añadido:', this.product.title);
   }
 }

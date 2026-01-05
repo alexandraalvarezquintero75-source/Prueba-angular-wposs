@@ -57,12 +57,10 @@ export class RegisterComponent {
             `Usuario ${user.name} creado con éxito`,
             '¡Bienvenido!'
           );
-          console.log('Usuario creado:', user);
           this.router.navigate(['/login']);
         },
-        error: (err) => {
+        error: () => {
           this.toastr.error('No se pudo completar el registro', 'Error');
-          console.error('Error en registro', err);
         },
       });
     }

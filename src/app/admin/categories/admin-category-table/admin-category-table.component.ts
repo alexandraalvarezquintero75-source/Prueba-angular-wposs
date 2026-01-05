@@ -11,7 +11,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Models & Services
 import { Category } from '../../../shared/components/models/category.model';
-import { ProductService } from '../../../core/services/product.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CategoryService } from '../../../core/services/category.service';
 import { ToastrService } from 'ngx-toastr';
@@ -35,7 +34,6 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 })
 export class AdminCategoryTableComponent implements OnInit {
   constructor(
-    private productService: ProductService,
     private categoryService: CategoryService,
     private toastr: ToastrService,
     private dialog: MatDialog
@@ -76,8 +74,7 @@ export class AdminCategoryTableComponent implements OnInit {
             );
             this.toastr.success('categoría eliminada correctamente', 'Sistema');
           },
-          error: (err) => {
-            console.error(err);
+          error: () => {
             this.toastr.error(
               'No se pudo eliminarla categoría, Verifique si tiene productos asociados',
               'Error'
