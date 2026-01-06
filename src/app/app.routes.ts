@@ -16,25 +16,62 @@ export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   // Rutas Públicas
-  { path: 'home', component: LandingPageComponent },
+  {
+    path: 'home',
+    component: LandingPageComponent,
+    data: { breadcrumb: 'Inicio' },
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'product/:id', component: ProductDetailComponent },
+  {
+    path: 'cart',
+    component: CartComponent,
+    data: { breadcrumb: 'Mi Carrito' },
+  },
+  {
+    path: 'product/:id',
+    component: ProductDetailComponent,
+    data: { breadcrumb: 'Detalle del producto' },
+  },
 
   // Rutas Administrativas Protegidas
   {
     path: 'admin',
     component: AdminLayoutComponent,
+    data: { breadcrumb: 'Admin' },
     canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'full' },
-      { path: 'products', component: AdminProductTableComponent },
-      { path: 'products/new', component: ProductFormComponent },
-      { path: 'products/edit/:id', component: ProductFormComponent },
-      { path: 'categories', component: AdminCategoryTableComponent },
-      { path: 'categories/new', component: CategoryFormComponent },
-      { path: 'categories/edit/:id', component: CategoryFormComponent },
+      {
+        path: 'products',
+        component: AdminProductTableComponent,
+        data: { breadcrumb: 'Productos' },
+      },
+      {
+        path: 'products/new',
+        component: ProductFormComponent,
+        data: { breadcrumb: 'Nuevo producto' },
+      },
+      {
+        path: 'products/edit/:id',
+        component: ProductFormComponent,
+        data: { breadcrumb: 'Editar producto' },
+      },
+      {
+        path: 'categories',
+        component: AdminCategoryTableComponent,
+        data: { breadcrumb: 'Categoria' },
+      },
+      {
+        path: 'categories/new',
+        component: CategoryFormComponent,
+        data: { breadcrumb: 'Crear Categoria' },
+      },
+      {
+        path: 'categories/edit/:id',
+        component: CategoryFormComponent,
+        data: { breadcrumb: 'Editar Categoria' },
+      },
     ],
   },
 

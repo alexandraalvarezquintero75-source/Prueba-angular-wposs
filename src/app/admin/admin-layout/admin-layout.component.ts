@@ -10,6 +10,7 @@ import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/c
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ToastrService } from 'ngx-toastr';
+import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-admin-layout',
@@ -22,6 +23,7 @@ import { ToastrService } from 'ngx-toastr';
     MatIconModule,
     MatDividerModule,
     MatDialogModule,
+    BreadcrumbComponent
   ],
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss'],
