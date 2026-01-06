@@ -1,3 +1,6 @@
+@use './cart-variables' as *;
+@use 'sass:color';
+
 .order-summary-section {
   position: sticky;
   top: 100px;

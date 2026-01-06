@@ -1,3 +1,6 @@
+@use './cart-variables' as *;
+@use 'sass:color';
+
 .empty-cart-state {
   text-align: center;
   padding: 80px 20px;
@@ -27,9 +30,10 @@
     @include transition;
 
     &:hover {
-      background: darken($primary-color, 8%);
+     background: color.adjust($primary-color, $lightness: -8%);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba($primary-color, 0.25);
+      box-shadow: 0 4px 12px color.adjust($primary-color, $alpha: -0.75);
+
     }
   }
 }

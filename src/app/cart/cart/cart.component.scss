@@ -1,7 +1,7 @@
-@import '../cart-page/cart-variables';
-@import '../cart-page/cart-empty-state';
-@import '../cart-page/cart-product-card';
-@import '../cart-page/cart-summary';
+@use '../cart-page/cart-variables' as *;
+@use '../cart-page/cart-empty-state' as *;
+@use '../cart-page/cart-product-card' as *;
+@use '../cart-page/cart-summary' as *;
 
 .cart-page-container {
   max-width: 1400px;
