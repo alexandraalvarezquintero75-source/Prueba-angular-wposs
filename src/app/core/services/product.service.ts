@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs'; // Importamos map
 import { Product } from '../../shared/components/models/product.model';
 
 export interface CreateProductDTO extends Omit<Product, 'id' | 'category'> {
@@ -15,12 +15,29 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  private cleanProductImages(product: any): Product {
+    return {
+      ...product,
+      images: product.images.map((img: string) => {
+        let cleanUrl = img.replace(/[\[\]\\"]/g, '');
+        if (cleanUrl.includes('placeimg.com')) {
+          return 'images/default.webp';
+        }
+        return cleanUrl;
+      }),
+    };
+  }
+
+  getProducts(): Observable<Product[]> {
+    return this.http
+      .get<any[]>(this.apiUrl)
+      .pipe(map((products) => products.map((p) => this.cleanProductImages(p))));
   }
 
   getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+    return this.http
+      .get<any>(`${this.apiUrl}/${id}`)
+      .pipe(map((p) => this.cleanProductImages(p)));
   }
 
   createProduct(data: CreateProductDTO): Observable<Product> {

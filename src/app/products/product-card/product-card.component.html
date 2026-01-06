@@ -1,6 +1,11 @@
 <mat-card class="product-card" [routerLink]="['/product', product.id]">
   <div class="card-image-container">
-    <img [src]="product.images[0]" [alt]="product.title" />
+    <img
+      [src]="product.images[0]"
+      [alt]="product.title"
+      (error)="handleImageError($event)"
+    />
+    /> />
   </div>
 
   <mat-card-content>

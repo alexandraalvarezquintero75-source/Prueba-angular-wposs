@@ -17,6 +17,11 @@ export class ProductCardComponent {
   @Input() product!: Product;
   @Output() addToCard = new EventEmitter<Product>();
 
+
+  handleImageError(event: any) {
+  event.target.src = '/images/default.webp';
+}
+
   onAddToCard(event: Event) {
     event.stopPropagation();
     this.addToCard.emit(this.product);
