@@ -1,74 +1,152 @@
-E-commerce Angular - Integración con Platzi Fake Store API
-Proyecto desarrollado como parte de la integración frontend para la gestión de productos, categorías y autenticación utilizando la Fake Store REST API de Platzi.
+E-commerce Angular – Integración con Platzi Fake Store API
 
-Link del Proyecto (Vercel): [https://prueba-angular-wposs.vercel.app/home]
+Proyecto frontend desarrollado con Angular que implementa un flujo completo de e-commerce, incluyendo autenticación, gestión de productos y categorías, control de roles y carrito de compras.
+La aplicación consume la Platzi Fake Store REST API y se encuentra desplegada en Vercel.
 
-Características del Proyecto
-Este proyecto implementa un flujo completo de e-commerce con Angular, incluyendo:
+Demo en producción:
+https://prueba-angular-wposs.vercel.app/home
 
-Autenticación JWT: Inicio de sesión seguro con almacenamiento de tokens.
+Descripción General
 
-Gestión de Productos (CRUD): Visualización en tarjetas para clientes y tabla administrativa para gestión completa.
+Este proyecto simula una plataforma de comercio electrónico moderna, enfocada en buenas prácticas de desarrollo frontend, experiencia de usuario y seguridad básica mediante autenticación JWT, diferenciando accesos entre Administradores y Clientes.
 
-Gestión de Categorías (CRUD): Organización de productos por categorías con validaciones de asociación.
+El objetivo principal es demostrar habilidades en:
 
-Carrito de Compras: Persistencia de productos seleccionados utilizando LocalStorage y gestión de cantidades.
+Angular moderno
 
-Roles y Permisos: Protección de rutas mediante AuthGuard para diferenciar accesos entre Administradores y Clientes.
+Manejo de estado reactivo
+
+Integración con APIs REST
+
+Protección de rutas y control de permisos
+
+Formularios reactivos y validaciones
+
+Funcionalidades Principales
+Autenticación y Autorización
+
+Inicio de sesión mediante JWT
+
+Almacenamiento del token en LocalStorage
+
+Protección de rutas con AuthGuard
+
+Control de acceso basado en roles (Administrador / Cliente)
+
+Gestión de Productos (CRUD)
+
+Visualización de productos en tarjetas para clientes
+
+Tabla administrativa para gestión completa
+
+Formularios reactivos reutilizables
+
+Validaciones de datos
+
+Gestión de Categorías (CRUD)
+
+Organización de productos por categorías
+
+Validaciones para mantener integridad de datos
+
+Interfaz administrativa dedicada
+
+Carrito de Compras
+
+Agregar y eliminar productos
+
+Agrupación por ID
+
+Gestión de cantidades
+
+Persistencia de datos en LocalStorage
+
+Interfaz de Usuario
+
+Componentes de Angular Material
+
+Notificaciones visuales con Ngx-Toastr
 
 Tecnologías Utilizadas
-Angular v19+: Framework principal.
 
-Angular Material: Componentes de interfaz de usuario.
+Angular v19+
 
-Signals & Computed: Gestión de estado reactivo
+Angular Material
 
-Reactive Forms: Formularios para CRUD y Login.
+Signals y Computed
 
-Platzi Fake Store API: Backend REST para el consumo de datos.
+Reactive Forms
 
-Ngx-Toastr: Mensajes de notificación al usuario.
+Platzi Fake Store API
 
-Instalación y Configuración
-Sigue estos pasos para ejecutar el proyecto localmente:
+Ngx-Toastr
 
-Clonar el repositorio:
-git clone [https://github.com/alexandraalvarezquintero75-source/Prueba-angular-wposs.git]
-cd [prueba-angular]
+LocalStorage
 
-Instalar dependencias:
+Vercel
+
+Instalación y Ejecución Local
+
+Clonar el repositorio
+
+git clone https://github.com/alexandraalvarezquintero75-source/Prueba-angular-wposs.git
+cd Prueba-angular-wposs
+
+
+Instalar dependencias
+
 npm install
 
+
 Ejecutar el servidor de desarrollo
+
 ng serve
 
-Para este proyecto, decidi guardar el token JWT en LocalStorage.
+Decisión Técnica: Uso de LocalStorage
 
-Elegi LocalStorage para guardar datos en el navegador y que no se pierdan al cerrar o recargar la página
+Para este proyecto se decidió almacenar el token JWT en LocalStorage con los siguientes objetivos:
 
-Requerimientos Funcionales Implementados
-Landing Page: Diseño basado en referencias de Dribbble con vista de productos y categorías.
+Mantener la sesión activa al recargar la página
 
-Módulo de Auth: Login funcional con protección de rutas privadas.
+Persistir información del carrito de compras
 
-Panel Administrativo: Tablas para productos y categorías con formularios reactivos reutilizables.
+Simplificar la gestión del estado en el navegador
 
-Carrito: Lógica de agrupación por ID y persistencia local.
+Credenciales de Prueba
+
+Administrador
+Correo: admin@mail.com
+
+Contraseña: admin123
+
+Usuario Cliente
+Puede crearse directamente desde el módulo de registro.
+
+###  Estructura del Proyecto
+
+```text
+src/app/
+├── admin/          # Panel administrativo (CRUD de productos y categorías)
+├── auth/           # Módulo de autenticación (Login y Registro)
+├── cart/           # Lógica de negocio y vista del carrito
+├── core/           # Singleton services, Guards e Interceptors
+├── landing/        # Home page y vistas públicas iniciales
+├── products/       # Catálogo, tarjetas y detalle de producto
+├── shared/         # Componentes transversales (Header, Footer, Dialogs)
+│   └── models/     # Interfaces e interfaces de dominio (Type Safety)
+├── app.routes.ts   # Configuración de Lazy Loading
+└── app.config.ts   # Inyección de dependencias global
+```
 
 Autor
-Nombre: Yelisa alexandra alvarez quintero
 
-Link de VERCEL[https://prueba-angular-wposs.vercel.app/home]
-Credenciales para inicio de sesion:
-Administrador [
-Correo
-admin@mail.com
-Contraseña
-admin123]
+Yelisa Alexandra Álvarez Quintero
+Frontend 
 
-Usuario[
-Puedes crear un usuario directamente en el registro
-]
+Repositorio:
+https://github.com/alexandraalvarezquintero75-source/Prueba-angular-wposs
 
-URL_DE_TU_REPOSITORIO:https://github.com/alexandraalvarezquintero75-source/Prueba-angular-wposs.
+Deploy en Vercel:
+https://prueba-angular-wposs.vercel.app/home
+
 
