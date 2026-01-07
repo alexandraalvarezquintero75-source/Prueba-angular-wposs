@@ -1,6 +1,6 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, switchMap, of } from 'rxjs';
+import { Observable, tap, switchMap, of } from 'rxjs'; //rxjs flujos de datos asinccronos
 import { User } from '../../shared/components/models/user.model';
 
 interface LoginResponse {
@@ -16,7 +16,7 @@ export class AuthService {
   private userProfile = signal<User | null>(null);
   public currentUser = this.userProfile.asReadonly();
 
-  private _isLoggedIn = signal<boolean>(!!localStorage.getItem('token'));
+  private _isLoggedIn = signal<boolean>(!!localStorage.getItem('token'));// si hay sesión activa chequeo localStorage"
   public isLoggedIn = this._isLoggedIn.asReadonly(); //asReadonly() convierte  la signal en solo lectura
 
   constructor(private http: HttpClient) {
@@ -28,10 +28,11 @@ export class AuthService {
     }
   }
 
+  //enviamos el correo y la contraseña
   login(credentials: { email: string; password: string }): Observable<User> {
     return this.http
       .post<LoginResponse>(`${this.API_URL}/auth/login`, credentials)
-      .pipe(
+      .pipe(//con pipe procesamos la respuesta paso a paso
         tap((res) => {
           if (res.access_token) {
             localStorage.setItem('token', res.access_token);

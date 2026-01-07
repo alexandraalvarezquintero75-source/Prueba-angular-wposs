@@ -15,6 +15,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   // Verificación de Rol para rutas de administración
+    //Si un usuario está intentando acceder a rutas admin Y NO es administrador"
   if (state.url.startsWith('/admin') && !authService.isAdmin()) {
     toastr.error('No tienes permisos de administrador', 'Acceso denegado');
     router.navigate(['/home']);

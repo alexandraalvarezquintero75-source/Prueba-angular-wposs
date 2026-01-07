@@ -6,89 +6,101 @@
   </div>
 
   @if (cartItems().length === 0) {
-    <div class="empty-cart-state">
-      <div class="empty-cart-icon">
-        <mat-icon>shopping_cart</mat-icon>
+  <div class="empty-cart-state">
+    <div class="empty-cart-icon">
+      <mat-icon>shopping_cart</mat-icon>
+    </div>
+    <h3>Tu carrito está vacío</h3>
+    <p>Explora nuestros productos y agrega algunos al carrito</p>
+    <button mat-flat-button class="go-to-shop-button" routerLink="/home">
+      <mat-icon>storefront</mat-icon>
+      Ir a la tienda
+    </button>
+  </div>
+  } @else {
+  <div class="cart-two-column-layout">
+    <div class="products-list-section">
+      <div class="section-header">
+        <h2>Mi Carrito</h2>
+        <span class="products-counter-badge">
+          {{ cartItems().length }}
+          {{ cartItems().length === 1 ? "producto" : "productos" }}
+        </span>
       </div>
-      <h3>Tu carrito está vacío</h3>
-      <p>Explora nuestros productos y agrega algunos al carrito</p>
-      <button mat-flat-button class="go-to-shop-button" routerLink="/home">
-        <mat-icon>storefront</mat-icon>
-        Ir a la tienda
+      <div class="cart-items-list">
+        @for (item of cartItems(); track item.id) {
+        <div class="product-item-card">
+          <div
+            class="product-image-wrapper"
+            [routerLink]="['/product', item.id]"
+          >
+            <img [src]="item.images[0]" [alt]="item.title" />
+            <div class="image-hover-overlay">
+              <mat-icon>visibility</mat-icon>
+            </div>
+          </div>
+
+          <div class="product-details-content">
+            <h3 [routerLink]="['/product', item.id]">{{ item.title }}</h3>
+            <div class="product-meta-info">
+              <span class="unit-price">{{ item.price | currency }}</span>
+              <span class="quantity-badge">
+                <mat-icon>shopping_bag</mat-icon>
+                Cantidad: {{ item.quantity }}
+              </span>
+            </div>
+          </div>
+
+          <div class="product-subtotal-wrapper">
+            <span class="subtotal-label">Subtotal</span>
+            <span class="subtotal-amount">{{
+              item.price * item.quantity | currency
+            }}</span>
+          </div>
+          <button
+            mat-icon-button
+            color="warn"
+            class="remove-product-button"
+            (click)="removeItem($event, item.id)"
+          >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+        }
+      </div>
+
+      <button
+        mat-stroked-button
+        class="clear-all-cart-button"
+        (click)="clearCart()"
+      >
+        <mat-icon>delete_sweep</mat-icon>
+        Vaciar carrito
       </button>
     </div>
-  } @else {
-    <div class="cart-two-column-layout">
 
-      <div class="products-list-section">
-        <div class="section-header">
-          <h2>Mi Carrito</h2>
-          <span class="products-counter-badge">
-            {{ cartItems().length }} {{ cartItems().length === 1 ? 'producto' : 'productos' }}
-          </span>
-        </div>
-        <div class="cart-items-list">
-          @for (item of cartItems(); track item.id) {
-            <div class="product-item-card">
+    <div class="order-summary-section">
+      <div class="summary-card">
+        <h3>Resumen</h3>
 
-              <div class="product-image-wrapper" [routerLink]="['/product', item.id]">
-                <img [src]="item.images[0]" [alt]="item.title" />
-                <div class="image-hover-overlay">
-                  <mat-icon>visibility</mat-icon>
-                </div>
-              </div>
-
-              <div class="product-details-content">
-                <h3 [routerLink]="['/product', item.id]">{{ item.title }}</h3>
-                <div class="product-meta-info">
-                  <span class="unit-price">{{ item.price | currency }}</span>
-                  <span class="quantity-badge">
-                    <mat-icon>shopping_bag</mat-icon>
-                    Cantidad: {{ item.quantity }}
-                  </span>
-                </div>
-              </div>
-
-              <div class="product-subtotal-wrapper">
-                <span class="subtotal-label">Subtotal</span>
-                <span class="subtotal-amount">{{ (item.price * item.quantity) | currency }}</span>
-              </div>
-              <button mat-icon-button color="warn" class="remove-product-button" (click)="removeItem($event, item.id)">
-                <mat-icon>delete_outline</mat-icon>
-              </button>
-            </div>
-          }
-        </div>
-
-        <button mat-stroked-button class="clear-all-cart-button" (click)="clearCart()">
-          <mat-icon>delete_sweep</mat-icon>
-          Vaciar carrito
-        </button>
-      </div>
-
-      <div class="order-summary-section">
-        <div class="summary-card">
-          <h3>Resumen</h3>
-
-          <div class="summary-content-wrapper">
-            <div class="summary-info-row">
-              <span>Productos ({{ cartItems().length }})</span>
-              <span>{{ total() | currency }}</span>
-            </div>
-
-            <div class="summary-divider-line"></div>
-            <div class="summary-info-row total-amount-row">
-              <span>Total</span>
-              <span class="final-total-amount">{{ total() | currency }}</span>
-            </div>
+        <div class="summary-content-wrapper">
+          <div class="summary-info-row">
+            <span>Productos ({{ cartItems().length }})</span>
+            <span>{{ total() | currency }}</span>
           </div>
-          <div class="cart-storage-info-box">
-            <mat-icon>info</mat-icon>
-            <p>Los productos en el carrito se guardan localmente en tu navegador</p>
+
+          <div class="summary-divider-line"></div>
+          <div class="summary-info-row total-amount-row">
+            <span>Total</span>
+            <span class="final-total-amount">{{ total() | currency }}</span>
           </div>
         </div>
+        <div class="cart-storage-info-box">
+          <mat-icon>info</mat-icon>
+          <p>Resumen de productos</p>
+        </div>
       </div>
-
     </div>
+  </div>
   }
 </div>
